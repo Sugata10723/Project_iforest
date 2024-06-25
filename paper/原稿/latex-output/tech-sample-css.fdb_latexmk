@@ -1,11 +1,11 @@
 # Fdb version 4
-["dvipdf"] 1718190340.14979 "latex-output/tech-sample-css.dvi" "latex-output/tech-sample-css.pdf" "latex-output/tech-sample-css" 1718190340.54499 0
-  "latex-output/tech-sample-css.dvi" 1718190339.94107 6484 cd167e5cea659f767fecf46f876273c8 "latex"
+["dvipdf"] 1719296294.57079 "latex-output/tech-sample-css.dvi" "latex-output/tech-sample-css.pdf" "latex-output/tech-sample-css" 1719296294.96611 0
+  "latex-output/tech-sample-css.dvi" 1719296294.36351 8496 136e9a8f0d4ec1e1c9df9f5ce92419d4 "latex"
   (generated)
   "latex-output/tech-sample-css.pdf"
   (rewritten before read)
-["latex"] 1718190339.64855 "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" "latex-output/tech-sample-css.dvi" "tech-sample-css" 1718190340.54434 0
-  "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" 1718190339.40229 4468 b72be41015b68a9380bc74d38bc000f0 ""
+["latex"] 1719296294.0729 "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" "latex-output/tech-sample-css.dvi" "tech-sample-css" 1719296294.96544 0
+  "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" 1719296293.83684 5814 4f569f1c0161878c71a3a12cb72f4a8c ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/ptex-fonts/jis/jisg.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
@@ -62,8 +62,8 @@
   "css.cls" 1690606856 2374 339b615c4b42034325ae42c7bb732a0d ""
   "ipsj.cls" 1690606856 141520 024d7d958f57bb44a9486b8fc8ad6a7b ""
   "ipsjtech.sty" 1690606856 6552 9d7e04cb93f03570e4dd6a7c174ed571 ""
-  "latex-output/tech-sample-css.aux" 1718190339.94029 1735 65481a62b6cb315f85507824b05f5995 "latex"
-  "tech-sample-css.tex" 1718190339.40229 4468 b72be41015b68a9380bc74d38bc000f0 ""
+  "latex-output/tech-sample-css.aux" 1719296294.36289 2092 e336f85b0ff02b25c7457b103b120b3a "latex"
+  "tech-sample-css.tex" 1719296293.83684 5814 4f569f1c0161878c71a3a12cb72f4a8c ""
   (generated)
   "latex-output/tech-sample-css.aux"
   "latex-output/tech-sample-css.dvi"

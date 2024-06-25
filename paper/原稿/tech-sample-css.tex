@@ -19,7 +19,7 @@
 \title{Isolation Forestを用いた\\IoT向け異常検知手法に関する考察}
 \etitle{A Study on Anomaly Detection Method \\for IoT using Isolation Forest}
 
-\affiliate{XX}{東京工業大学 情報理工学院 数理・計算科学系 松浦研究室\\
+\affiliate{XX}{東京工業大学 情報理工学院 数理・計算科学系\\
 Department of Mathematical and Computing Sciences, School of Computing, Tokyo Institute of Technology}
 \affiliate{YY}{株式会社YYセキュリティ研究所\\
 Security Laboratories, YY Corporation}
@@ -73,30 +73,44 @@ Isolation Forest, IoT, IDS, Anomaly Detection
 以下のことを書く．
 
 \begin{itemize}
-    \item 大目標
-    \item 大目標を実現する必要性
-    \item 問題提起：大目標を達成するために必要なことを述べ，そのためにどのような問題があるのかを述べる(小目標に分割する)．
-    \item 関連研究：問題を解決するための従来研究を紹介
-    \item 本研究の目的
+    \item 大目標：小規模な環境向けのIoT向け異常検知手法の提案・「IoT環境を考えたとき、iforestが軽量でうまくいきそうなので、〜うまくいかないことも多かった。そこで、データセットの〜を工夫して、そのやり方を報告する」→本研究の目的を最初に述べちゃう
+    \item 大目標を実現する必要性：卒論と同じ
+    \item 問題提起（大目標を達成するために必要なことを述べ，そのためにどのような問題があるのかを述べる(小目標に分割する)．）関連研究をリサーチしてみると参考にした論文が良さそうだ。しかし、いくつか課題もあるので改善したい
+    1. 特徴量エンジニアリング　2.　判定の組み合わせアルゴリズム 
+    \item （関連研究：問題を解決するための従来研究を紹介）
+    \item 本研究の目的：1. 特徴量エンジニアリングの比較 2. 判定の組み合わせアルゴリズムの改善
 \end{itemize}
 
 
 \section{研究方法}
 
 \subsection{Isolation Forestの説明}
-Isolation Forestの説明
+Isolation Forestの説明（卒論と同じ）
+かける
 
 \subsection{IDSの概要}
 
 IDSの概要をかく.
+採用した理由を述べる.
+
+\subsubsection{全体像}
+かける
+
+\subsubsection{特徴量エンジニアリング}
+
+\section{事前実験？}
+デモデータを使って実験して、提案アルゴリズムに説得力を持たせる
 
 
 \section{結果と考察}
+（本論文のメイン）
 
 \subsection{実験方法}
 
 \subsubsection{実験環境}
 他の人が再現できるように実験環境を書く.
+1. 特徴量エンジニアリングの比較
+2. 判定の組み合わせアルゴリズムの比較
 
 \subsubsection{データセット}
 使用したデータセットの概要と, その妥当性について述べる.
@@ -112,14 +126,14 @@ IDSの概要をかく.
 
 \subsubsection{本論文における目的に即した結論を導く}
 \begin{itemize}
-    \item 本結果を一般化したどのような結論を導き出せるかを，論文の目的に即して述べる.
+    \item 本結果を一般化したどのような結論を導き出せるかを，論文の目的に即して述べる.　1. このくらい有効特徴量あればいける　２.iforestではうまくいく
     \item 実験結果の妥当性を説明する.
 \end{itemize}
 
 \subsubsection{結果から予測される問題を提起する.}
 \begin{itemize}
-    \item 結果が生じた理由について考察する.
-    \item 本実験結果を認めると，どのような現象の予測や応用可能性があるかを述べる.
+    \item 結果が生じた理由について考察する.　1. 2.グラフの分布を見ると、縦横で切るより斜めで切ったほうがいい
+    \item 本実験結果を認めると，どのような現象の予測や応用可能性があるかを述べる.１.２.より良い局面、より良いアルゴリズムがあるかも
 \end{itemize}
 
 \section{おわりに}
