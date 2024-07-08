@@ -1,11 +1,11 @@
 # Fdb version 4
-["dvipdf"] 1720476597.09121 "latex-output/tech-sample-css.dvi" "latex-output/tech-sample-css.pdf" "latex-output/tech-sample-css" 1720476598.55674 0
-  "latex-output/tech-sample-css.dvi" 1720476596.84085 11648 4778d7b9e3a8642b4392d419a262e113 "latex"
+["dvipdf"] 1720476704.50517 "latex-output/tech-sample-css.dvi" "latex-output/tech-sample-css.pdf" "latex-output/tech-sample-css" 1720476705.97069 0
+  "latex-output/tech-sample-css.dvi" 1720476704.27668 11560 ef69b47061431b67a23cda43154bca64 "latex"
   (generated)
   "latex-output/tech-sample-css.pdf"
   (rewritten before read)
-["latex"] 1720476596.52287 "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" "latex-output/tech-sample-css.dvi" "tech-sample-css" 1720476598.55596 0
-  "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" 1720476595.67127 7953 e3c2699b3c8460ba4d6de65a2cd96e83 ""
+["latex"] 1720476703.93914 "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" "latex-output/tech-sample-css.dvi" "tech-sample-css" 1720476705.96991 0
+  "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" 1720476702.97641 7895 df08f31a6c97b77976821face30b0957 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/ptex-fonts/jis/jisg.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
@@ -63,7 +63,7 @@
   "css.cls" 1690606856 2374 339b615c4b42034325ae42c7bb732a0d ""
   "ipsj.cls" 1690606856 141520 024d7d958f57bb44a9486b8fc8ad6a7b ""
   "ipsjtech.sty" 1690606856 6552 9d7e04cb93f03570e4dd6a7c174ed571 ""
-  "latex-output/tech-sample-css.aux" 1720476596.84014 2488 7710bd1e691469c72719fc2bc81b8d9c "latex"
+  "latex-output/tech-sample-css.aux" 1720476704.27602 2488 193df372fdea15e6753d318f72d3692d "latex"
   "pictures/eps/classes_UNSW.eps" 1720476201.59491 2743052 28b541882f7eac8878d57ac3cb8d22a2 ""
   "pictures/eps/collectness_UNSW.eps" 1720476201.63687 2857770 c2a999af331505b7add1e743cece4558 ""
   "pictures/eps/collectness_UNSW2.eps" 1720476201.68007 2857771 c44cbaaa7badc66994c980100a9b0ba3 ""
@@ -72,7 +72,7 @@
   "pictures/eps/predict_classes_UNSW.eps" 1720476201.83657 2857774 508648ea040ceb660014f7182a978a75 ""
   "pictures/eps/predict_classes_UNSW2.eps" 1720476201.87981 2857775 9bad622aa64c9dbdbf111b15a71f54e7 ""
   "pictures/eps/select_noise.eps" 1720476201.91703 1598346 02bf159bc5bcf3df2730dba0562f1ee2 ""
-  "tech-sample-css.tex" 1720476595.67127 7953 e3c2699b3c8460ba4d6de65a2cd96e83 ""
+  "tech-sample-css.tex" 1720476702.97641 7895 df08f31a6c97b77976821face30b0957 ""
   (generated)
   "latex-output/tech-sample-css.aux"
   "latex-output/tech-sample-css.dvi"
