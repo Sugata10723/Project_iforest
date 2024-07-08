@@ -1,11 +1,11 @@
 # Fdb version 4
-["dvipdf"] 1719296294.57079 "latex-output/tech-sample-css.dvi" "latex-output/tech-sample-css.pdf" "latex-output/tech-sample-css" 1719296294.96611 0
-  "latex-output/tech-sample-css.dvi" 1719296294.36351 8496 136e9a8f0d4ec1e1c9df9f5ce92419d4 "latex"
+["dvipdf"] 1720476597.09121 "latex-output/tech-sample-css.dvi" "latex-output/tech-sample-css.pdf" "latex-output/tech-sample-css" 1720476598.55674 0
+  "latex-output/tech-sample-css.dvi" 1720476596.84085 11648 4778d7b9e3a8642b4392d419a262e113 "latex"
   (generated)
   "latex-output/tech-sample-css.pdf"
   (rewritten before read)
-["latex"] 1719296294.0729 "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" "latex-output/tech-sample-css.dvi" "tech-sample-css" 1719296294.96544 0
-  "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" 1719296293.83684 5814 4f569f1c0161878c71a3a12cb72f4a8c ""
+["latex"] 1720476596.52287 "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" "latex-output/tech-sample-css.dvi" "tech-sample-css" 1720476598.55596 0
+  "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" 1720476595.67127 7953 e3c2699b3c8460ba4d6de65a2cd96e83 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/ptex-fonts/jis/jisg.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
@@ -13,6 +13,7 @@
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin10.tfm" 1463434352 856 39c171483fe1bb7d0e1368980c0c205b ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx8.tfm" 1136768653 1332 1fde11373e221473104d6cc5993f046e ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx9.tfm" 1136768653 1328 5442e22a7072966dbaf88ca900acf3f0 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm" 1136768653 1532 9162035f4e7176612125649e348e2195 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm" 1136768653 1300 63a6111ee6274895728663cf4b4e7e81 ""
@@ -62,8 +63,16 @@
   "css.cls" 1690606856 2374 339b615c4b42034325ae42c7bb732a0d ""
   "ipsj.cls" 1690606856 141520 024d7d958f57bb44a9486b8fc8ad6a7b ""
   "ipsjtech.sty" 1690606856 6552 9d7e04cb93f03570e4dd6a7c174ed571 ""
-  "latex-output/tech-sample-css.aux" 1719296294.36289 2092 e336f85b0ff02b25c7457b103b120b3a "latex"
-  "tech-sample-css.tex" 1719296293.83684 5814 4f569f1c0161878c71a3a12cb72f4a8c ""
+  "latex-output/tech-sample-css.aux" 1720476596.84014 2488 7710bd1e691469c72719fc2bc81b8d9c "latex"
+  "pictures/eps/classes_UNSW.eps" 1720476201.59491 2743052 28b541882f7eac8878d57ac3cb8d22a2 ""
+  "pictures/eps/collectness_UNSW.eps" 1720476201.63687 2857770 c2a999af331505b7add1e743cece4558 ""
+  "pictures/eps/collectness_UNSW2.eps" 1720476201.68007 2857771 c44cbaaa7badc66994c980100a9b0ba3 ""
+  "pictures/eps/dim_vs_accu.eps" 1720476201.71739 1620465 1f6d5b44ce9762d53de96281be21716f ""
+  "pictures/eps/noise_accu.eps" 1720476201.75364 1623227 28722b4a2b04ec1600c90b641973ebcc ""
+  "pictures/eps/predict_classes_UNSW.eps" 1720476201.83657 2857774 508648ea040ceb660014f7182a978a75 ""
+  "pictures/eps/predict_classes_UNSW2.eps" 1720476201.87981 2857775 9bad622aa64c9dbdbf111b15a71f54e7 ""
+  "pictures/eps/select_noise.eps" 1720476201.91703 1598346 02bf159bc5bcf3df2730dba0562f1ee2 ""
+  "tech-sample-css.tex" 1720476595.67127 7953 e3c2699b3c8460ba4d6de65a2cd96e83 ""
   (generated)
   "latex-output/tech-sample-css.aux"
   "latex-output/tech-sample-css.dvi"
