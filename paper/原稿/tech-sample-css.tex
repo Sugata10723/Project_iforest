@@ -79,11 +79,24 @@ Isolation Forest, IoT, IDS, Anomaly Detection
 \end{itemize}
 
 
+
+
 \section{研究方法}
 
 \subsection{Isolation Forestの説明}
-Isolation Forestの説明（卒論と同じ）
-かける
+Isolation Forest（以下，iForest）は，外れ値検出のためのアルゴリズムである。iForestは異常データが少数であり、離れているという前提に基づいている。ランダムにデータを分割していくと、異常データは相対的に早く分離される。iForestは以下のステップで実行される。
+
+\subsubsection*{1. データの分割}
+ランダムに選んだ特徴量から、ランダムに選んだ値をもとにデータを分割する。これを一定回数繰り返し、複数のツリーを作成する。
+
+\subsubsection*{2. 異常スコアの算出}
+データがツリーの枝に到達するまでの平均パスをもとに、異常スコアを算出する。具体的な計算式は以下の通りである。
+
+ここで、$E(h(x))$はデータ点$x$の平均パス長、$c(n)$はデータセットのサイズ$n$に依存する定数である。
+
+\subsubsection*{3. 異常判定}
+先ほど計算した異常スコアをもとに異常検知を行う。通常、トレーニングデータの異常スコアの上位10\%を閾値として設定し、それを超えたデータを異常と判定する。
+
 
 \subsection{IDSの概要}
 
@@ -91,20 +104,26 @@ IDSの概要をかく.
 採用した理由を述べる.
 
 \subsubsection{全体像}
-かける
+今回の研究では，以下のようなIDSで異常検知を行った．
 
-\subsubsection{特徴量エンジニアリング}
+\subsubsection{}
 
-\section{事前実験？}
-Isolation Forestを組み込んだ
+
+\section{事前実験}
+Isolation Forestを異常検知手法として使用する際，どのような問題があるのかを明らかにするため，事前実験を行った．はじめにデモデータを使用して，iForestの挙動を確認した．その考察をもとに、特徴量選択手法の提案を行なった
+
+使用したデモデータは、(2.5, 2.5)と(-2.5, -2.5)を中心とした
+正常データ群と、10から-10の範囲に一様に分布した異常データ群からなる．二次元の場合のデモデータを図\ref{fig:demodata}に示す．
 
 \begin{figure}[tb]
     \centering
-    \includegraphics[width=\linewidth]{pictures/eps/select_noise.eps}
-    \caption{select\_noiseに関する図の説明（和文）}
-    \ecaption{Description of the select\_noise figure (English).}
-    \label{fig:select_noise}
+    \includegraphics[width=\linewidth]{pictures/eps/demodata.eps}
+    \caption{デモデータに関する図の説明（和文）}
+    \ecaption{Description of the dim\_vs\_accu figure (English).}
+    \label{fig:demodata}
 \end{figure}
+
+はじめに、デモデータと特徴量数の関係を調査した．図\ref{fig:dim_vs_accu}に示すように、特徴量数が増えるにつれて、異常検知の精度が単調に向上することがわかった．また、精度ののびは増加に比例して緩やかになっていることもわかる。ゆえに、iForestは十分な特徴量数が存在すると言える。
 
 \begin{figure}[tb]
     \centering
@@ -114,12 +133,24 @@ Isolation Forestを組み込んだ
     \label{fig:dim_vs_accu}
 \end{figure}
 
+パケット通信を監視して得られたデータセットの全ての特徴が、異常検知に有効であるわけではない。iForestは特徴量同士の重みづけを行わないため、判定に有効でない特徴量が混ざると精度が低下すると考えられる。そこで、図\ref{fig:noise_accu}に示すように、ノイズとなる特徴量を混ぜた時の精度を調査した。この結果から、ノイズとなる特徴量が混ざると精度が低下することがわかった。また、今回の実験の場合だと、ノイズとなる特徴量が判定に有効な特徴量数の2倍以上になると、精度が急激に低下することがわかった。
+
 \begin{figure}[tb]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/noise_accu.eps}
     \caption{noise\_accuに関する図の説明（和文）}
     \ecaption{Description of the noise\_accu figure (English).}
     \label{fig:noise_accu}
+\end{figure}
+
+前の実験から、データセットからノイズとなる特徴量を取り除くことが重要であることがわかった。ところで、iForestはツリーベースの異常検知手法である。そこで、同じくツリーベースのRandam Forestから特徴の重要度を算出すれば、ノイズとなる特徴量を取り除けるのではないかと考えた。図\ref{fig:select_noise}は、Random Forestで算出した特徴量の重要度を表している。このグラフは、ノイズ特徴量を判別できていることがわかる。そして、実際にノイズ特徴量を取り除いた場合の精度を調査したところ、精度は???\%から0.945\%まで向上した。この結果から、Feature Importanceによる特徴量選択手法は精度の向上に有効ではないかと考えた。
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=\linewidth]{pictures/eps/select_noise.eps}
+    \caption{select\_noiseに関する図の説明（和文）}
+    \ecaption{Description of the select\_noise figure (English).}
+    \label{fig:select_noise}
 \end{figure}
 
 \section{結果と考察}
