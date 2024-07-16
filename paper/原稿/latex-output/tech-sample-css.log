@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.euc) (TeX Live 2023) (preloaded format=platex 2024.1.8)  9 JUL 2024 15:17
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.euc) (TeX Live 2023) (preloaded format=platex 2024.1.8)  16 JUL 2024 13:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -3362,9 +3362,9 @@ LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <11.82813> not available
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <11.82813> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 69.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9.61035> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 86.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 73.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9.61035> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 86.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 73.
 [1
 
 
@@ -3372,9 +3372,9 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9.61035> not available
 File: pictures/eps/demodata.eps Graphic file (type eps)
 <pictures/eps/demodata.eps>
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <8.13184> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 121.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 139.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <8.13184> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 121.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 139.
 File: pictures/eps/dim_vs_accu.eps Graphic file (type eps)
 <pictures/eps/dim_vs_accu.eps>
 File: pictures/eps/noise_accu.eps Graphic file (type eps)
@@ -3392,14 +3392,12 @@ File: pictures/eps/collectness_UNSW2.eps Graphic file (type eps)
 File: pictures/eps/predict_classes_UNSW.eps Graphic file (type eps)
 <pictures/eps/predict_classes_UNSW.eps>
 File: pictures/eps/predict_classes_UNSW2.eps Graphic file (type eps)
-<pictures/eps/predict_classes_UNSW2.eps>
-LaTeX Font Info:    Calculating math sizes for size <8.8711> on input line 245.
+<pictures/eps/predict_classes_UNSW2.eps> [3]
+LaTeX Font Info:    Calculating math sizes for size <8.8711> on input line 285.
 
-LaTeX Warning: Empty `thebibliography' environment on input line 247.
+LaTeX Warning: Empty `thebibliography' environment on input line 287.
 
-[3] [4
-
-] (latex-output/tech-sample-css.aux)
+[4] (latex-output/tech-sample-css.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-11-01>
@@ -3407,12 +3405,12 @@ L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 2033 strings out of 474830
- 33941 string characters out of 5760887
+ 2035 strings out of 474830
+ 34003 string characters out of 5760887
  1934370 words of memory out of 5000000
- 24351 multiletter control sequences out of 15000+600000
+ 24353 multiletter control sequences out of 15000+600000
  598398 words of font info for 214 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  69i,7n,68p,674b,402s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on latex-output/tech-sample-css.dvi (4 pages, 17576 bytes).
+Output written on latex-output/tech-sample-css.dvi (4 pages, 20636 bytes).
