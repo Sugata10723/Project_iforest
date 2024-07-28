@@ -224,39 +224,60 @@ Isolation Forestを異常検知手法として使用する際，どのような�
 
 \subsection{結果}
 
+\begin{table}[tb]
+    \caption{UNSWでのモデルの性能評価結果（和文）}
+    \ecaption{Performance evaluation results of models (English).}
+    \centering
+    \footnotesize
+    \begin{tabular}{lcccc}
+        \hline\hline
+        model & accuracy & precision & recall & f1 \\
+        \hline
+        特徴量選択なし & 0.7506 & 0.7949 & 0.7506 & 0.7526 \\
+        特徴量選択あり & 0.8440 & 0.9321 & 0.8440 & 0.8817 \\
+        ロジスティック回帰で判定 & 0.9112 & 0.9146 & 0.9112 & 0.9082 \\
+        \hline
+    \end{tabular}
+    \label{tab:model_performance}
+\end{table}
+
+\begin{table}[tb]
+    \caption{NSLでのモデルの性能評価結果（和文）}
+    \ecaption{Performance evaluation results of models (English).}
+    \centering
+    \footnotesize
+    \begin{tabular}{lcccc}
+        \hline\hline
+        model & accuracy & precision & recall & f1 \\
+        \hline
+        特徴量選択なし & 0.7873 & 0.8749 & 0.7873 & 0.8171 \\
+        特徴量選択あり & 0.8466 & 0.9174 & 0.8466 & 0.8775 \\
+        ロジスティック回帰で判定 & 0.9452 & 0.9453 & 0.9452 & 0.9452 \\
+        \hline
+    \end{tabular}
+    \label{tab:model_performance}
+\end{table}
 
 
 \begin{figure}[tb]
     \centering
-    \includegraphics[width=\linewidth]{pictures/eps/collectness_UNSW.eps}
-    \caption{collectness\_UNSWに関する図の説明（和文）}
+    \includegraphics[width=\linewidth]{pictures/eps/UNSW1.eps}
+    \caption{collectness\_UNSW1（和文）}
     \ecaption{Description of the collectness\_UNSW figure (English).}
     \label{fig:collectness_UNSW}
 \end{figure}
 
 \begin{figure}[tb]
     \centering
-    \includegraphics[width=\linewidth]{pictures/eps/collectness_UNSW2.eps}
-    \caption{collectness\_UNSW2に関する図の説明（和文）}
-    \ecaption{Description of the collectness\_UNSW2 figure (English).}
-    \label{fig:collectness_UNSW2}
+    \includegraphics[width=\linewidth]{pictures/eps/UNSW2.eps}
+    \caption{UNSW2（和文）}
+    \ecaption{Description of the collectness\_UNSW figure (English).}
+    \label{fig:collectness_UNSW}
 \end{figure}
 
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/predict_classes_UNSW.eps}
-    \caption{predict\_classes\_UNSWに関する図の説明（和文）}
-    \ecaption{Description of the predict\_classes\_UNSW figure (English).}
-    \label{fig:predict_classes_UNSW}
-\end{figure}
 
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/predict_classes_UNSW2.eps}
-    \caption{predict\_classes\_UNSW2に関する図の説明（和文）}
-    \ecaption{Description of the predict\_classes\_UNSW2 figure (English).}
-    \label{fig:predict_classes_UNSW2}
-\end{figure}
+
+
 
 \subsection{考察}
 
