@@ -1,11 +1,11 @@
 # Fdb version 4
-["dvipdf"] 1722193561.29941 "latex-output/tech-sample-css.dvi" "latex-output/tech-sample-css.pdf" "latex-output/tech-sample-css" 1722193563.32725 0
-  "latex-output/tech-sample-css.dvi" 1722193561.08155 21160 efb62e91b6e174a77cc99bcaca05243f "latex"
+["dvipdf"] 1722212333.8442 "latex-output/tech-sample-css.dvi" "latex-output/tech-sample-css.pdf" "latex-output/tech-sample-css" 1722212335.91124 0
+  "latex-output/tech-sample-css.dvi" 1722212333.62374 25324 5d6d526241e813b8658b9fac027adac5 "latex"
   (generated)
   "latex-output/tech-sample-css.pdf"
   (rewritten before read)
-["latex"] 1722193560.76334 "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" "latex-output/tech-sample-css.dvi" "tech-sample-css" 1722193563.32648 0
-  "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" 1722193559.86722 14775 7bfc3b1b912f2c2ed51b96de2933f56f ""
+["latex"] 1722212333.3053 "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" "latex-output/tech-sample-css.dvi" "tech-sample-css" 1722212335.91045 0
+  "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" 1722212332.45527 17682 14bfa0e1ffaa65cb75146c6cd285e6a0 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/ptex-fonts/jis/jisg.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
@@ -63,20 +63,20 @@
   "css.cls" 1690606856 2374 339b615c4b42034325ae42c7bb732a0d ""
   "ipsj.cls" 1690606856 141520 024d7d958f57bb44a9486b8fc8ad6a7b ""
   "ipsjtech.sty" 1690606856 6552 9d7e04cb93f03570e4dd6a7c174ed571 ""
-  "latex-output/tech-sample-css.aux" 1722193561.08072 2534 3715b38b37f31a6633717d61e823ae8a "latex"
+  "latex-output/tech-sample-css.aux" 1722212333.62281 2516 10050de4f52d824ddf64200893708246 "latex"
   "pictures/eps/NSL1.eps" 1722193289.83867 2884351 ffdf6bf356a3f2c7e43b9d6cc13a83de ""
   "pictures/eps/NSL2.eps" 1722193289.85113 2884351 6b60165daefbb9d4d60c0d929aeeff9f ""
   "pictures/eps/NSL3.eps" 1722193289.8625 2884351 3e76959491e863adaab00e5aa2a6769e ""
   "pictures/eps/NSL4.eps" 1722193289.87271 2884351 3ec6b8e905c8c0aaa604711650caada4 ""
-  "pictures/eps/UNSW1.eps" 1722193289.88237 2884352 97c863bb1c2f0acd3db7c25c39ae1eef ""
-  "pictures/eps/UNSW2.eps" 1722193289.89178 2884352 6edf04a2950806eb38508420c89ea7f8 ""
-  "pictures/eps/UNSW3.eps" 1722193289.9008 2884352 b21d685cb192857d5ad830931de1ee8f ""
-  "pictures/eps/UNSW4.eps" 1722193289.90922 2884352 59ffcf510d704412179baff6fd40bddc ""
+  "pictures/eps/UNSW1.eps" 1722212229.94629 2884352 285368f36e181ecb02080864cdb621cd ""
+  "pictures/eps/UNSW2.eps" 1722212229.95427 2884352 fd482d70964dac85dd17365c4bc24e49 ""
+  "pictures/eps/UNSW3.eps" 1722212229.96229 2884352 6b523830644e1059ac0c4a4304ddac9d ""
+  "pictures/eps/UNSW4.eps" 1722212229.97174 2884352 54a03ea29bc961d7a2945d0b8f2247c0 ""
   "pictures/eps/demodata.eps" 1722193289.9145 1545959 df964dfac84347340e13eac26dcfba43 ""
   "pictures/eps/dim_vs_accu.eps" 1722193289.92053 1620465 b3baeedcf623d5801c2077a09e8a8613 ""
   "pictures/eps/noise_accu.eps" 1722193289.92533 1623227 446b90df33acfbde8544e2c962f1f3ef ""
   "pictures/eps/select_noise.eps" 1722193289.93524 1598346 559423e5328e4725aa8bd13134991317 ""
-  "tech-sample-css.tex" 1722193559.86722 14775 7bfc3b1b912f2c2ed51b96de2933f56f ""
+  "tech-sample-css.tex" 1722212332.45527 17682 14bfa0e1ffaa65cb75146c6cd285e6a0 ""
   (generated)
   "latex-output/tech-sample-css.aux"
   "latex-output/tech-sample-css.dvi"

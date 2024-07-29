@@ -215,6 +215,10 @@ INPUT ./pictures/eps/UNSW1.eps
 INPUT ./pictures/eps/UNSW1.eps
 INPUT ./pictures/eps/UNSW1.eps
 INPUT pictures/eps/UNSW1.eps
+INPUT ./pictures/eps/NSL1.eps
+INPUT ./pictures/eps/NSL1.eps
+INPUT ./pictures/eps/NSL1.eps
+INPUT pictures/eps/NSL1.eps
 INPUT ./pictures/eps/UNSW2.eps
 INPUT ./pictures/eps/UNSW2.eps
 INPUT ./pictures/eps/UNSW2.eps
@@ -227,10 +231,6 @@ INPUT ./pictures/eps/UNSW4.eps
 INPUT ./pictures/eps/UNSW4.eps
 INPUT ./pictures/eps/UNSW4.eps
 INPUT pictures/eps/UNSW4.eps
-INPUT ./pictures/eps/NSL1.eps
-INPUT ./pictures/eps/NSL1.eps
-INPUT ./pictures/eps/NSL1.eps
-INPUT pictures/eps/NSL1.eps
 INPUT ./pictures/eps/NSL2.eps
 INPUT ./pictures/eps/NSL2.eps
 INPUT ./pictures/eps/NSL2.eps

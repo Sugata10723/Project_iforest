@@ -171,32 +171,57 @@ Isolation Forestを異常検知手法として使用する際，どのような�
     \label{fig:select_noise}
 \end{figure}
 
-\subsection{より効果的な異常判定について}
+\subsection{より効果的な判定の組み合わせ方について}
+Iforestを用いた異常検知手法では、攻撃データと正常データのそれぞれでトレーニングされたサブシステムが、Isolation Forestによって異常検知を行う。最終的な判定は、これらの結果を組み合わせることで行う。AbuAlgahamらの研究では、表\ref{tab:combination}のようにそれぞの判定器の結果を組み合わせることで、最終的な判定を行なっている。
+しかし、表\ref{tab:combination}のようにマッピングを行うことは２つの問題を抱えている。一つ目は、1. それぞれの判定器の異常スコアの閾値を適切に設定する必要があること, 2. 異常判定が、２つの異常スコアから直線的に決定されるため、異常スコアの分布によっては適切な判定ができないことである。
+
+\begin{table}[tb]
+    \caption{組み合わせアルゴリズム（和文）}
+    \ecaption{combination algorithm (English).}
+    \centering
+    \footnotesize
+    \begin{tabular}{lcc}
+        \hline
+        Normal subsystem & Attack subsystem & combination result\\
+        \hline
+        Normal & Anomaly & Normal \\
+        Anomaly & Normal & Anomaly \\
+        Normal & Normal & Anomaly \\
+        Anomaly & Anomaly & unknown \\
+        \hline
+    \end{tabular}
+    \label{tab:combination}
+\end{table}
+
+そこで、本研究では、異常スコアの分布によって適切な判定ができるように、異常スコアをロジスティック回帰を用いて判定する手法を提案する。この手法では、それぞれのサブシステムの異常スコアを入力とし、ロジスティック回帰によって異常判定を行う。この手法を用いることで、1.iForestの閾値を設定する必要がない 2. 閾値による直線的な分割よりも、より正確な分割が行える という利点がある。
 
 \section{結果と考察}
 
-\subsection{実験方法}
+\subsection{比較するアルゴリズム}
 
-\subsubsection{実験環境}
+本研究では、以下の2つの比較を行った。
+特徴量エンジニアリングの効果の比較を行うため、特徴量選択を行わなかった場合と、Random Forestを用いた特徴量選択手法を用いた場合の結果を比較する。また、判定の組み合わせアルゴリズムの比較には、2つのサブシステムの結果をマッピングする手法と、Rogistic Regressionを用いて判定を行う手法の結果を比較した。
+
 \begin{enumerate}
     \item \textbf{特徴量エンジニアリングの比較}：
         \begin{itemize}
+            \item 特徴量選択なし
             \item Random Forestを用いた特徴量選択手法
-            \item
-            \item
         \end{itemize}
     \item \textbf{判定の組み合わせアルゴリズムの比較}：
         \begin{itemize}
-            \item 2つのサブシステムの結果を組み合わせる手法
-            \item k-meansクラスタリングを用いて判定を行う手法
-            \item Rogistic Regressionを用いて判定を行う手法
+            \item マッピングして判定
+            \item Rogistic Regressionを用いて判定
         \end{itemize}
 \end{enumerate}
+
+\subsubsection{実験環境}
 
 実験はMac Book Pro 2017 2.3GHz Intel Core i5, 8GB RAMで行った。また、実験に用いたプログラムはPython3.10.4で実装した。Isolation ForestやRandom Forestの実装には、scikit-learnのライブラリを用いた。
 
 \subsubsection{データセット}
-使用したデータセットの概要とその妥当性について述べる。
+本実験では、以下の2つのデータセットを用いた。
+
 \begin{enumerate}
     \item \textbf{NSL-KDD}：
         KDDCUP99の問題点を解決するために提案されたデータセットであり、データの冗長性や攻撃データの割合を調整したもの。
@@ -205,15 +230,40 @@ Isolation Forestを異常検知手法として使用する際，どのような�
 \end{enumerate}
 
 \subsubsection{評価指標}
-使用した評価指標とその妥当性について述べる。
+本研究では、以下の4つの評価指標を用いてモデルの性能を評価した。
+
 \begin{enumerate}
     \item \textbf{Accuracy}：
         正確度を示し、予測が実際のクラスと一致する割合を示す。
+    \item \textbf{Precision}：
+        予測が正常と判定されたデータのうち、実際に正常であるデータの割合を示す。
+    \item \textbf{Recall}：
+        実際に正常であるデータのうち、正常と判定されたデータの割合を示す。
     \item \textbf{F1-score}：
-        Precision（適合率）とRecall（再現率）の調和平均を示す。
+        PrecisionとRecallの調和平均を示す。
 \end{enumerate}
 
 \subsection{結果}
+
+初めに、UNSWとNSLのデータセットに対して、トレーニングデータの異常スコアの分布を調査した。
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=\linewidth]{pictures/eps/UNSW1.eps}
+    \caption{UNSW1（和文）}
+    \ecaption{Description of the collectness\_UNSW figure (English).}
+    \label{fig:UNSW1}
+\end{figure}
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=\linewidth]{pictures/eps/NSL1.eps}
+    \caption{NSL1（和文）}
+    \ecaption{Description of the collectness\_UNSW figure (English).}
+    \label{fig:NSL1}
+\end{figure}
+
+結果は以下の通りである。
 
 \begin{table}[tb]
     \caption{UNSWでのモデルの性能評価結果（和文）}
@@ -249,21 +299,16 @@ Isolation Forestを異常検知手法として使用する際，どのような�
     \label{tab:model_performance}
 \end{table}
 
+この結果から、2つのデータセットにおいて、特徴量選択を行うことで精度が向上することがわかった。また、ロジスティック回帰を用いて判定を行うことで、精度が向上することがわかった。
 
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/UNSW1.eps}
-    \caption{collectness\_UNSW1（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:collectness_UNSW}
-\end{figure}
+
 
 \begin{figure}[tb]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/UNSW2.eps}
     \caption{UNSW2（和文）}
     \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:collectness_UNSW}
+    \label{fig:UNSW2}
 \end{figure}
 
 
@@ -272,7 +317,7 @@ Isolation Forestを異常検知手法として使用する際，どのような�
     \includegraphics[width=\linewidth]{pictures/eps/UNSW3.eps}
     \caption{UNSW3（和文）}
     \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:collectness_UNSW}
+    \label{fig:UNSW3}
 \end{figure}
 
 
@@ -281,16 +326,7 @@ Isolation Forestを異常検知手法として使用する際，どのような�
     \includegraphics[width=\linewidth]{pictures/eps/UNSW4.eps}
     \caption{UNSW4（和文）}
     \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:collectness_UNSW}
-\end{figure}
-
-
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/NSL1.eps}
-    \caption{NSL1（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:collectness_UNSW}
+    \label{fig:UNSW4}
 \end{figure}
 
 \begin{figure}[tb]
@@ -298,7 +334,7 @@ Isolation Forestを異常検知手法として使用する際，どのような�
     \includegraphics[width=\linewidth]{pictures/eps/NSL2.eps}
     \caption{NSL2（和文）}
     \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:collectness_UNSW}
+    \label{fig:NSL2}
 \end{figure}
 
 \begin{figure}[tb]
@@ -306,7 +342,7 @@ Isolation Forestを異常検知手法として使用する際，どのような�
     \includegraphics[width=\linewidth]{pictures/eps/NSL3.eps}
     \caption{NSL3（和文）}
     \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:collectness_UNSW}
+    \label{fig:NSL3}
 \end{figure}
 
 \begin{figure}[tb]
@@ -314,10 +350,13 @@ Isolation Forestを異常検知手法として使用する際，どのような�
     \includegraphics[width=\linewidth]{pictures/eps/NSL4.eps}
     \caption{NSL4（和文）}
     \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:collectness_UNSW}
+    \label{fig:NSL4}
 \end{figure}
 
 \subsection{考察}
+今回の実験から、特徴量選択を行うことで精度が向上することがわかった。また、ロジスティック回帰を用いて判定を行うことで、精度が向上することがわかった。これは、今回使用した２つのデータセットの異常スコアの分布の境界線が斜めであり、線形な境界線でうまく分割できたためであると考えられる。
+境界線が曲面であったり、データセット
+
 
 
 \section{おわりに}
