@@ -1,11 +1,11 @@
 # Fdb version 4
-["dvipdf"] 1722212333.8442 "latex-output/tech-sample-css.dvi" "latex-output/tech-sample-css.pdf" "latex-output/tech-sample-css" 1722212335.91124 0
-  "latex-output/tech-sample-css.dvi" 1722212333.62374 25324 5d6d526241e813b8658b9fac027adac5 "latex"
+["dvipdf"] 1722215091.18678 "latex-output/tech-sample-css.dvi" "latex-output/tech-sample-css.pdf" "latex-output/tech-sample-css" 1722215093.4885 0
+  "latex-output/tech-sample-css.dvi" 1722215090.96306 26056 6bf4899da8f0da0076b86c3e22c0b4e4 "latex"
   (generated)
   "latex-output/tech-sample-css.pdf"
   (rewritten before read)
-["latex"] 1722212333.3053 "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" "latex-output/tech-sample-css.dvi" "tech-sample-css" 1722212335.91045 0
-  "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" 1722212332.45527 17682 14bfa0e1ffaa65cb75146c6cd285e6a0 ""
+["latex"] 1722215090.60291 "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" "latex-output/tech-sample-css.dvi" "tech-sample-css" 1722215093.48766 0
+  "/Users/ham/Desktop/css-ids/paper/原稿/tech-sample-css.tex" 1722215090.2462 18158 18fb52918c65e066a822477adce20961 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/ptex-fonts/jis/jisg.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
@@ -63,7 +63,7 @@
   "css.cls" 1690606856 2374 339b615c4b42034325ae42c7bb732a0d ""
   "ipsj.cls" 1690606856 141520 024d7d958f57bb44a9486b8fc8ad6a7b ""
   "ipsjtech.sty" 1690606856 6552 9d7e04cb93f03570e4dd6a7c174ed571 ""
-  "latex-output/tech-sample-css.aux" 1722212333.62281 2516 10050de4f52d824ddf64200893708246 "latex"
+  "latex-output/tech-sample-css.aux" 1722215090.96219 2516 10050de4f52d824ddf64200893708246 "latex"
   "pictures/eps/NSL1.eps" 1722193289.83867 2884351 ffdf6bf356a3f2c7e43b9d6cc13a83de ""
   "pictures/eps/NSL2.eps" 1722193289.85113 2884351 6b60165daefbb9d4d60c0d929aeeff9f ""
   "pictures/eps/NSL3.eps" 1722193289.8625 2884351 3e76959491e863adaab00e5aa2a6769e ""
@@ -76,7 +76,7 @@
   "pictures/eps/dim_vs_accu.eps" 1722193289.92053 1620465 b3baeedcf623d5801c2077a09e8a8613 ""
   "pictures/eps/noise_accu.eps" 1722193289.92533 1623227 446b90df33acfbde8544e2c962f1f3ef ""
   "pictures/eps/select_noise.eps" 1722193289.93524 1598346 559423e5328e4725aa8bd13134991317 ""
-  "tech-sample-css.tex" 1722212332.45527 17682 14bfa0e1ffaa65cb75146c6cd285e6a0 ""
+  "tech-sample-css.tex" 1722215090.2462 18158 18fb52918c65e066a822477adce20961 ""
   (generated)
   "latex-output/tech-sample-css.aux"
   "latex-output/tech-sample-css.dvi"
