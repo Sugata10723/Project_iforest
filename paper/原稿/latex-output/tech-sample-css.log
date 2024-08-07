@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.euc) (TeX Live 2023) (preloaded format=platex 2024.1.8)  1 AUG 2024 20:27
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.euc) (TeX Live 2023) (preloaded format=platex 2024.1.8)  7 AUG 2024 20:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -3331,44 +3331,44 @@ LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <8.8711> not available
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <8.8711> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 41.
 LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <8.5373> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 54.
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 52.
 LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <8.5373> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 54.
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 52.
 LaTeX Font Info:    Font shape `JT1/mc/bx/it' in size <8.5373> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 54.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 52.
 LaTeX Font Info:    Font shape `JY1/mc/bx/it' in size <8.5373> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 54.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 52.
 LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <19.2207> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 68.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 66.
 LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <19.2207> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 68.
-LaTeX Font Info:    Calculating math sizes for size <9.61035> on input line 68.
-LaTeX Font Info:    Calculating math sizes for size <11.82813> on input line 68.
-LaTeX Font Info:    Calculating math sizes for size <8.27965> on input line 68.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 66.
+LaTeX Font Info:    Calculating math sizes for size <9.61035> on input line 66.
+LaTeX Font Info:    Calculating math sizes for size <11.82813> on input line 66.
+LaTeX Font Info:    Calculating math sizes for size <8.27965> on input line 66.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.22882> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 68.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 66.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.22882> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 68.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 66.
 LaTeX Font Info:    Font shape `JT1/mc/m/sc' in size <10.34961> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 68.
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 66.
 LaTeX Font Info:    Font shape `JY1/mc/m/sc' in size <10.34961> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 68.
-LaTeX Font Info:    Calculating math sizes for size <10.34961> on input line 68.
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 66.
+LaTeX Font Info:    Calculating math sizes for size <10.34961> on input line 66.
 LaTeX Font Info:    Font shape `JT1/mc/m/sc' in size <7.24469> not available
-(Font)              Font shape `JT1/mc/m/n' tried instead on input line 68.
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 66.
 LaTeX Font Info:    Font shape `JY1/mc/m/sc' in size <7.24469> not available
-(Font)              Font shape `JY1/mc/m/n' tried instead on input line 68.
-LaTeX Font Info:    Calculating math sizes for size <7.24469> on input line 68.
-LaTeX Font Info:    Calculating math sizes for size <8.13184> on input line 68.
-LaTeX Font Info:    Calculating math sizes for size <5.69225> on input line 68.
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 66.
+LaTeX Font Info:    Calculating math sizes for size <7.24469> on input line 66.
+LaTeX Font Info:    Calculating math sizes for size <8.13184> on input line 66.
+LaTeX Font Info:    Calculating math sizes for size <5.69225> on input line 66.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <11.82813> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 71.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 69.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <11.82813> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 71.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 69.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9.61035> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 75.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 73.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9.61035> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 75.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 73.
 [1
 
 
@@ -3376,16 +3376,16 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9.61035> not available
 File: pictures/eps/demodata.eps Graphic file (type eps)
 <pictures/eps/demodata.eps>
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <8.13184> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 141.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 139.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <8.13184> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 141.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 139.
 File: pictures/eps/dim_vs_accu.eps Graphic file (type eps)
 <pictures/eps/dim_vs_accu.eps> [2]
 File: pictures/eps/noise_accu.eps Graphic file (type eps)
 <pictures/eps/noise_accu.eps>
 File: pictures/eps/select_noise.eps Graphic file (type eps)
 <pictures/eps/select_noise.eps>
-Overfull \hbox (3.09903pt too wide) in paragraph at lines 185--196
+Overfull \hbox (3.09903pt too wide) in paragraph at lines 183--194
  [][][][] 
  []
 
@@ -3394,12 +3394,12 @@ File: pictures/eps/UNSW1.eps Graphic file (type eps)
 <pictures/eps/UNSW1.eps>
 File: pictures/eps/NSL1.eps Graphic file (type eps)
 <pictures/eps/NSL1.eps>
-Overfull \hbox (27.84091pt too wide) in paragraph at lines 275--285
+Overfull \hbox (27.84091pt too wide) in paragraph at lines 273--283
  [][][][] 
  []
 
 
-Overfull \hbox (27.84091pt too wide) in paragraph at lines 292--302
+Overfull \hbox (27.84091pt too wide) in paragraph at lines 290--300
  [][][][] 
  []
 
@@ -3415,9 +3415,9 @@ File: pictures/eps/NSL3.eps Graphic file (type eps)
 <pictures/eps/NSL3.eps>
 File: pictures/eps/NSL4.eps Graphic file (type eps)
 <pictures/eps/NSL4.eps> [4]
-LaTeX Font Info:    Calculating math sizes for size <8.8711> on input line 388.
+LaTeX Font Info:    Calculating math sizes for size <8.8711> on input line 386.
 
-LaTeX Warning: Empty `thebibliography' environment on input line 390.
+LaTeX Warning: Empty `thebibliography' environment on input line 388.
 
 [5] (latex-output/tech-sample-css.aux)
  ***********
