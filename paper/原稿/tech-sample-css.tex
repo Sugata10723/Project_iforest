@@ -39,7 +39,7 @@ National Institute of ZZ}
 %\author{Hanako Anzen}{XX, YY, ZZ}
 
 \begin{abstract}
-    本論文では、Isolation Forestを用いたIoT向け異常検知手法の改善を行なった。この研究の背景に、IoT（Internet of Things）の普及がある。実際、2030年には約300億台ものデバイスが利用されると予測されており、すべてのIoT機器のセキュリティ確保が重要な課題となっている。特に2016年のMirai型マルウェアによるDDoS攻撃はその必要性を浮き彫りにした。今回は、専門的なセキュリティ対策が難しい家庭内ネットワークなどの小規模環境に着目し、軽量で高速な異常検知システムの提案を目指した。Isolation Forestは軽量で高速に動作する異常検知手法として注目されているが、これを用いた従来の方法には二つの問題が存在する。閾値を手動で設定する必要がある点と、異常判定のアルゴリズムの精度に限界がある点である。これらの課題を解決するために、本研究ではロジスティック回帰を用いた判定アルゴリズムを提案する。提案手法を二つのデータセットで実験した結果、精度がそれぞれ84.4\%から91.1\%、84.6\%から94.5\%に改善したことを確認した。
+    本論文では、Isolation Forestを用いたIoT向け異常検知手法の改善を行なった。この研究の背景にIoT（Internet of Things）の普及がある。2030年には約300億台ものデバイスが利用されると予測されており、すべてのIoT機器のセキュリティ確保が重要な課題となっている。特に2016年のMirai型マルウェアによるDDoS攻撃はその必要性を浮き彫りにした。本研究は専門的なセキュリティ対策が難しい、家庭内ネットワークなどの小規模環境に着目し、軽量で高速な異常検知システムの提案を目指した。Isolation Forestは軽量で高速に動作する異常検知手法として注目されているが、これを用いた従来の方法には二つの問題が存在する。閾値を手動で設定する必要がある点と、閾値による異常判定のアルゴリズムの精度に限界がある点である。これらの課題を解決するため、異常判定をする際にロジスティック回帰を応用した判定アルゴリズムを提案する。提案手法を二つのデータセットで実験した結果、精度がそれぞれ84.4\%から91.1\%、84.6\%から94.5\%に改善したことを確認した。
 
 \end{abstract}
 
@@ -50,6 +50,7 @@ Isolation Forest， IoT， IDS， 異常検知
 \end{jkeyword}
 
 \begin{eabstract}
+    This paper presents an improved anomaly detection method for IoT environments using Isolation Forest. The motivation for this study lies in the widespread adoption of the Internet of Things (IoT). By 2030, it is estimated that around 30 billion devices will be in use, making the security of all IoT devices a critical issue. The necessity of this was highlighted by the 2016 DDoS attack caused by Mirai malware. This study focuses on small-scale environments, such as home networks, where implementing specialized security measures is challenging, and aims to propose a lightweight and fast anomaly detection system. Although Isolation Forest is recognized for being a lightweight and fast anomaly detection method, traditional approaches using it have two main issues: the need for manual threshold setting and limitations in the accuracy of anomaly detection algorithms based on these thresholds. To address these challenges, we propose an anomaly detection algorithm that incorporates logistic regression for decision-making. Experiments on two datasets showed that the accuracy of the proposed method improved from 84.4\% to 91.1\% and from 84.6\% to 94.5\%, respectively.
 abstract
 
 \end{eabstract}
@@ -128,7 +129,7 @@ IDSの設計は以下の3つのセクションに分けられる：
 
 
 \section{iForestの問題点の整理}
-Isolation Forestを異常検知手法として使用する際，どのような問題があるのかを明らかにするため，事前実験を行った．はじめにデモデータを使用して，iForestの挙動を確認した．その考察をもとに、特徴量選択手法の提案を行なった
+Isolation Forestを異常検知手法として使用する際にどのような問題があるのかを明らかにするための事前実験を行った．はじめにデモデータを使用して，iForestの挙動を確認した．その考察をもとに特徴量選択手法の提案を行なった
 
 使用したデモデータは、(2.5, 2.5)と(-2.5, -2.5)を中心とした
 正常データ群と、10から-10の範囲に一様に分布した異常データ群からなる．二次元の場合のデモデータを図\ref{fig:demodata}に示す．
@@ -151,7 +152,7 @@ Isolation Forestを異常検知手法として使用する際，どのような�
     \label{fig:dim_vs_accu}
 \end{figure}
 
-パケット通信を監視して得られたデータセットの全ての特徴が、異常検知に有効であるわけではない。iForestは特徴量同士の重みづけを行わないため、判定に有効でない特徴量が混ざると精度が低下すると考えられる。そこで、図\ref{fig:noise_accu}に示すように、ノイズとなる特徴量を混ぜた時の精度を調査した。この結果から、ノイズとなる特徴量が混ざると精度が低下することがわかった。また、今回の実験の場合だと、ノイズとなる特徴量が判定に有効な特徴量数の2倍以上になると、精度が急激に低下することがわかった。
+続いて、デモデータにノイズ特徴量を含めたときの精度の悪化について調査した。パケット通信を監視して得られたデータセットの全ての特徴が、異常検知に有効なわけではない。そして、iForestは特徴量同士の重みづけを行わないため、判定に有効でない特徴量が混ざると精度が低下すると考えられる。図\ref{fig:noise_accu}に示すように、ノイズとなる特徴量が混ざると精度が低下することがわかった。また、今回の実験の場合だと、ノイズ特徴量が判定に有効な特徴量数の2倍以上になると、精度が急激に低下することがわかった。
 
 \begin{figure}[tb]
     \centering
@@ -161,7 +162,7 @@ Isolation Forestを異常検知手法として使用する際，どのような�
     \label{fig:noise_accu}
 \end{figure}
 
-前の実験から、データセットからノイズとなる特徴量を取り除くことが重要であることがわかった。ところで、iForestはツリーベースの異常検知手法である。そこで、同じくツリーベースのRandam Forestから特徴の重要度を算出すれば、ノイズとなる特徴量を取り除けるのではないかと考えた。図\ref{fig:select_noise}は、Random Forestで算出した特徴量の重要度を表している。このグラフは、ノイズ特徴量を判別できていることがわかる。そして、実際にノイズ特徴量を取り除いた場合の精度を調査したところ、精度は???\%から0.945\%まで向上した。この結果から、Feature Importanceによる特徴量選択手法は精度の向上に有効ではないかと考えた。
+前の実験から、データセットからノイズとなる特徴量を取り除くことが重要であると考えられる。ところで、iForestはツリーベースの異常検知手法である。そこで、同じくツリーベースのRandam Forestから特徴の重要度を算出すれば、ノイズとなる特徴量を取り除けるのではないかと考えた。図\ref{fig:select_noise}は、Random Forestで算出した特徴量の重要度を表している。このグラフは、ノイズ特徴量を判別できていることがわかる。そして、実際にノイズ特徴量を取り除いた場合の精度を調査したところ、精度は???\%から0.945\%まで向上した。この結果から、Feature Importanceによる特徴量選択手法は精度の向上に有効ではないかと考えた。
 
 \begin{figure}[tb]
     \centering
@@ -172,8 +173,7 @@ Isolation Forestを異常検知手法として使用する際，どのような�
 \end{figure}
 
 \subsection{より効果的な判定の組み合わせ方について}
-Iforestを用いた異常検知手法では、攻撃データと正常データのそれぞれでトレーニングされたサブシステムが、Isolation Forestによって異常検知を行う。最終的な判定は、これらの結果を組み合わせることで行う。AbuAlgahamらの研究では、表\ref{tab:combination}のようにそれぞの判定器の結果を組み合わせることで、最終的な判定を行なっている。
-しかし、表\ref{tab:combination}のようにマッピングを行うことは２つの問題を抱えている。一つ目は、1. それぞれの判定器の異常スコアの閾値を適切に設定する必要があること, 2. 異常判定が、２つの異常スコアから直線的に決定されるため、異常スコアの分布によっては適切な判定ができないことである。
+Iforestを用いた異常検知手法では、攻撃データと正常データのそれぞれでトレーニングされたサブシステムが、Isolation Forestによって異常検知を行う。最終的な判定は、これらの結果を組み合わせて行う。AbuAlgahamらの研究では、表\ref{tab:combination}のようにそれぞれの判定器の結果を組み合わせて最終的な判定を行う。
 
 \begin{table}[tb]
     \caption{組み合わせアルゴリズム（和文）}
@@ -193,7 +193,14 @@ Iforestを用いた異常検知手法では、攻撃データと正常データ�
     \label{tab:combination}
 \end{table}
 
-そこで、本研究では、異常スコアの分布によって適切な判定ができるように、異常スコアをロジスティック回帰を用いて判定する手法を提案する。この手法では、それぞれのサブシステムの異常スコアを入力とし、ロジスティック回帰によって異常判定を行う。この手法を用いることで、1.iForestの閾値を設定する必要がない 2. 閾値による直線的な分割よりも、より正確な分割が行える という利点がある。
+しかし、表\ref{tab:combination}のようなマッピングによる判定手法は以下の2つの問題を抱えている。
+\begin{itemize}
+    \item それぞれの判定器の異常スコアの閾値を手動で設定する必要があること
+    \item 異常判定の境界線が直線であるため、異常スコアの分布によっては誤判定が多くなること
+\end{itemize}
+実際に異常スコアの分布を調査したところ、図\ref{fig:UNSW1}と図\ref{fig:NSL1}のように、異常スコアの分布が斜めになっていることがわかる。このような場合、直線的な分割では正確な判定ができない。
+
+そこで、本研究では、異常スコアの分布によって適切な判定ができるように、異常検知の境界線を、ロジスティック回帰を用いて決定する手法を提案する。この手法では、それぞれのサブシステムの異常スコアを入力とし、ロジスティック回帰によって異常判定を行う。この手法を用いることで、1.iForestの閾値を設定する必要がない 2. 閾値による直線的な分割よりも正確な判定が行える という利点がある。
 
 \section{結果と考察}
 
@@ -245,7 +252,7 @@ Iforestを用いた異常検知手法では、攻撃データと正常データ�
 
 \subsection{結果}
 
-初めに、UNSWとNSLのデータセットに対して、トレーニングデータの異常スコアの分布を調査した。
+初めに、UNSWとNSLのデータセットに対して、トレーニングデータの異常スコアの分布を調査した。図\ref{fig:UNSW1}と図\ref{fig:NSL1}に示すように、異常スコアの分布が斜めになっていることがわかる。このような場合、表\ref{tab:combination}のような直線的な分割では正確な判定ができない。
 
 \begin{figure}[tb]
     \centering
@@ -275,8 +282,9 @@ Iforestを用いた異常検知手法では、攻撃データと正常データ�
         model & accuracy & precision & recall & f1 \\
         \hline
         特徴量選択なし & 0.7506 & 0.7949 & 0.7506 & 0.7526 \\
+        特徴量選択なし、ロジスティック回帰で判定 & 0.8685 &  0.8666 & 0.8685 & 0.8666 \\
         特徴量選択あり & 0.8440 & 0.9321 & 0.8440 & 0.8817 \\
-        ロジスティック回帰で判定 & 0.9112 & 0.9146 & 0.9112 & 0.9082 \\
+        特徴量選択あり、ロジスティック回帰で判定 & 0.9112 & 0.9146 & 0.9112 & 0.9082 \\
         \hline
     \end{tabular}
     \label{tab:model_performance}
@@ -292,6 +300,7 @@ Iforestを用いた異常検知手法では、攻撃データと正常データ�
         model & accuracy & precision & recall & f1 \\
         \hline
         特徴量選択なし & 0.7873 & 0.8749 & 0.7873 & 0.8171 \\
+        特徴量選択なし、ロジスティック回帰で判定 & - & - & - & -\\ 
         特徴量選択あり & 0.8466 & 0.9174 & 0.8466 & 0.8775 \\
         ロジスティック回帰で判定 & 0.9452 & 0.9453 & 0.9452 & 0.9452 \\
         \hline
@@ -299,7 +308,7 @@ Iforestを用いた異常検知手法では、攻撃データと正常データ�
     \label{tab:model_performance}
 \end{table}
 
-この結果から、2つのデータセットにおいて、特徴量選択を行うことで精度が向上することがわかった。また、ロジスティック回帰を用いて判定を行うことで、精度が向上することがわかった。
+この結果から、また、ロジスティック回帰を用いて判定を行うことで、精度が向上することがわかった。
 
 
 
@@ -354,12 +363,9 @@ Iforestを用いた異常検知手法では、攻撃データと正常データ�
 \end{figure}
 
 \subsection{考察}
-今回の実験から、特徴量選択を行うことで精度が向上することがわかった。また、ロジスティック回帰を用いて判定を行うことでも精度が向上させられることがわかった。これは、今回使用した２つのデータセットの異常スコアの分布の境界線が斜めであり、線形な境界線でうまく分割できたためであると考えられる。
-境界線が曲面であったり、データセットが
+今回の実験から、ロジスティック回帰を応用した異常判定手法により、精度が向上することがわかった。これは、今回使用した２つのデータセットの、異常スコアの分布の境界線が斜めであり、線形な境界線でうまく分割できたためであると考えられる。
 
-混ざってしまっている場合、うまくいかない
-→なんでこれをiforesetを使っているのか
-→判定の速さが
+境界線が曲面であったり、データセットが混ざってしまっている場合、うまくいかない
 
 plusAlphaでかければいいこと
 モデル構築のコストの比較
@@ -368,13 +374,6 @@ plusAlphaでかければいいこと
 
 ロジスティック回帰におけるランダムサンプルしての精度の比較（調べてもいい）
 サンプリングの適用範囲（データ量と精度のトレードオフ）
-
-svcc 判定の決定技を作成して
-（さまざまな観点から
-決定技だとredteamと合意できる）
-first(国際機関のcert)
-≠≠≠≠
-
 
 \section{おわりに}
 おわりにを書く.
