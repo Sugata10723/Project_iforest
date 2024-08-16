@@ -253,7 +253,12 @@ Iforestを用いた異常検知手法では、攻撃データと正常データ�
 
 \subsection{結果}
 
-初めに、UNSWとNSLのデータセットに対して、トレーニングデータの異常スコアの分布を調査した。図\ref{fig:UNSW1}と図\ref{fig:NSL1}に示すように、異常スコアの分布が斜めになっていることがわかる。このような場合、表\ref{tab:combination}のような直線的な分割では正確な判定ができない。
+初めに、2つのデータセットに対してトレーニングデータの異常スコアの分布を調査した。横軸は正常データで訓練されたiForestが算出した異常スコアであり、攻撃データのIForestが計算したものが縦軸である。それぞれの零点は異常スコアの閾値であり、負方向に大きいと異常スコアが高く、正方向に大きいと異常スコアが小さいことを示す。各点の色はデータのラベルを表し、赤が攻撃(1)、青が正常(0)である。
+
+図\ref{fig:UNSW1}はデータセットUNSWの異常スコア分布であり、図\ref{fig:NSL1}はデータセットNSLの異常スコアの分布である。UNSWのデータセットでは、データが対角線方向に分布しており、
+2つのサブシステムの判定が相反していることがわかる。また、正常データが右下に多く存在し、
+
+異常スコアの分布が斜めになっていることがわかる。このような場合、表\ref{tab:combination}のような直線的な分割では正確な判定ができない。
 
 \begin{figure}[tb]
     \centering
@@ -310,58 +315,6 @@ Iforestを用いた異常検知手法では、攻撃データと正常データ�
 \end{table}
 
 この結果から、また、ロジスティック回帰を用いて判定を行うことで、精度が向上することがわかった。
-
-
-
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/UNSW2.eps}
-    \caption{UNSW2（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:UNSW2}
-\end{figure}
-
-
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/UNSW3.eps}
-    \caption{UNSW3（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:UNSW3}
-\end{figure}
-
-
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/UNSW4.eps}
-    \caption{UNSW4（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:UNSW4}
-\end{figure}
-
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/NSL2.eps}
-    \caption{NSL2（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:NSL2}
-\end{figure}
-
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/NSL3.eps}
-    \caption{NSL3（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:NSL3}
-\end{figure}
-
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/NSL4.eps}
-    \caption{NSL4（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:NSL4}
-\end{figure}
 
 \subsection{考察}
 今回の実験から、ロジスティック回帰を応用した異常判定手法により、精度が向上することがわかった。これは、今回使用した２つのデータセットの、異常スコアの分布の境界線が斜めであり、線形な境界線でうまく分割できたためであると考えられる。
