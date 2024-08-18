@@ -275,8 +275,6 @@ UNSWデータセットでは、データが対角線方向に分布しており�
     \label{fig:NSL1}
 \end{figure}
 
-結果は以下の通りである。
-
 \begin{table}[tb]
     \caption{UNSWでのモデルの性能評価結果（和文）}
     \ecaption{Performance evaluation results of models (English).}
@@ -292,7 +290,7 @@ UNSWデータセットでは、データが対角線方向に分布しており�
         特徴量選択あり、ロジスティック回帰で判定 & 0.9112 & 0.9146 & 0.9112 & 0.9082 \\
         \hline
     \end{tabular}
-    \label{tab:model_performance}
+    \label{tab:model_performance_UNSW}
 \end{table}
 
 \begin{table}[tb]
@@ -310,15 +308,15 @@ UNSWデータセットでは、データが対角線方向に分布しており�
         ロジスティック回帰で判定 & 0.9452 & 0.9453 & 0.9452 & 0.9452 \\
         \hline
     \end{tabular}
-    \label{tab:model_performance}
+    \label{tab:model_performance_NSL}
 \end{table}
 
-この結果から、また、ロジスティック回帰を用いて判定を行うことで、精度が向上することがわかった。
+それぞれの実験結果は表\ref{tab:model_performance_UNSW},表\ref{tab:model_performance_NSL}の通りである。表\ref{tab:model_performance_UNSW}を見ると、特徴量の選択をすることで、精度が0.7506から0.8440に向上したことがわかる。また、ロジスティック回帰を用いて判定を行うことで、精度が0.8440から0.9112に向上したことがわかる。同様に、表\ref{tab:model_performance_NSL}から、データセットNSLでも、特徴量の選択をすることで精度が0.7873から0.8466に向上し、ロジスティック回帰を用いて判定を行うことで精度が0.8466から0.9452に向上したことが確認できた。
 
 \subsection{考察}
 
-うまくいった理由
-今回の実験から、ロジスティック回帰を応用した異常判定手法により、精度が向上することがわかった。これは、今回使用した２つのデータセットの、異常スコアの分布の境界線が斜めでうまく分割できたから。
+(うまくいった理由)
+今回の実験から、ロジスティック回帰を応用した異常判定手法により、精度が向上することがわかった。これは、今回使用した２つのデータセットにおいて、異常スコアの分布の境界線が斜めでうまく分割できたから。
 
 適用範囲
 境界線が曲面であったり、データセットが混ざってしまっている場合、うまくいかない
