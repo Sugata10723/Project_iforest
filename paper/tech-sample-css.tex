@@ -21,17 +21,15 @@
 
 \affiliate{XX}{東京工業大学 情報理工学院 数理・計算科学系\\
 Department of Mathematical and Computing Sciences, School of Computing, Tokyo Institute of Technology}
-\affiliate{YY}{株式会社YYセキュリティ研究所\\
-Security Laboratories, YY Corporation}
-\paffiliate{ZZ}{国立研究開発法人ZZ研究所\\
-National Institute of ZZ}
+\affiliate{YY}{東京工業大学 学術国際情報センター\\
+Global Scientific Information and Computing Center}
 
 %% メールアドレスは省略可能だが，代表者のメールアドレスは必須．
 %% 姓名の間は半角スペースを入れること．
 
 \author{菅田 大輔}{Daisuke Sugata}{XX}[sugata.d.aa@m.titech.ac.jp]
-\author{石井 将大}{Masahiro Ishii}{XX, YY, ZZ}[]
-\author{松浦 知史}{Satoshi Matsuura}{YY}[]
+\author{石井 将大}{Masahiro Ishii}{YY}[mishii@gsic.titech.ac.jp]
+\author{松浦 知史}{Satoshi Matsuura}{YY}[matsuura@gsic.titech.ac.jp]
 
 %% the following is author command for english option.
 %% at least one e-mail address is required.
@@ -66,8 +64,8 @@ Isolation Forest, IoT, IDS, Anomaly Detection
 
 %1
 \section{はじめに}
-Isolation Forest（以下、IF）は、その計算効率の良さから異常検知に広く用いられている。AbuAlgahamらは、IoT向けのIDS（Intrusion Detection System）としてIFを用いた手法を提案している。しかし、IFを用いた従来の手法には、手動での閾値設定や判定精度の限界など、いくつかの課題を抱えている。本研究では、これらの問題に対処するために、IFの異常判定にロジスティック回帰を応用した新たな異常検知手法を提案する。
-この研究の背景として、IoT（Internet of Things）の急速な普及が挙げられる。実際によると、2030年には約300億台ものデバイスが利用されると予測されており、すべてのIoT機器のセキュリティ確保が重要な課題となっている。特に2016年のMirai型マルウェアによるDDoS攻撃はその必要性を浮き彫りにした。GitHub, Twitter, Reddit, Netflixなど, いくつかの有名ウェブサイトがアクセス不能になった. これは、家庭用のルーターやデジタルビデオレコーダーなどの管理不十分なデバイスが Mirai型マルウェアに感染し, 一斉に特定のサーバーにアクセスを行うよう強制されたことが原因である.
+Isolation Forest（以下、IF）は、その計算効率の良さから異常検知に広く用いられている。AbuAlgahamらは、IoT向けのIDS（Intrusion Detection System）としてIFを用いた手法を提案している\cite{AbuAlghanam2023-sx}。しかし、IFを用いた従来の手法には、手動での閾値設定や判定精度の限界など、いくつかの課題を抱えている。本研究では、これらの問題に対処するために、IFの異常判定にロジスティック回帰を応用した新たな異常検知手法を提案する。
+この研究の背景として、IoT（Internet of Things）の急速な普及が挙げられる。実際によると、2030年には約300億台ものデバイスが利用されると予測されており、すべてのIoT機器のセキュリティ確保が重要な課題となっている。特に2016年のMirai型マルウェアによるDDoS攻撃はその必要性を浮き彫りにした\cite{8115504}。GitHub, Twitter, Reddit, Netflixなど, いくつかの有名ウェブサイトがアクセス不能になった. これは、家庭用のルーターやデジタルビデオレコーダーなどの管理不十分なデバイスが Mirai型マルウェアに感染し, 一斉に特定のサーバーにアクセスを行うよう強制されたことが原因である.
 公的機関や企業組織といった大規模な環境では, セキュリティの専門家が構築し運用するフレームワークによって, IoT機器の安全性が確保されている. しかし, 先ほど述べたように、IoT機器は多くの場所で使用されており, 家庭内のネットワークなどの小さな組織の場合となると, これらを管理・運用するための人員リソースを確保するのが難しくなる. 加えて、高価なセキュリティシステムを導入することも困難である. そのため, 安価な計算機環境でも高速に動作するようなセキュリティシステムが求められている.
 こうした背景から, 小規模な環境に適した IDS (Intrusion Detection System) の設計について考察する. 3章で従来の IF を用いた異常検知手法の問題点を整理し, 4章でこれらの問題を解決する提案手法について述べる. 5章では, UNSWとNSLの2つのデータセットを用いて、提案手法の有効性を評価した.
 
@@ -75,15 +73,15 @@ Isolation Forest（以下、IF）は、その計算効率の良さから異常�
 
 \subsection{Isolation Forestの説明}
 
-Isolation Forest（以下、IF）は、外れ値を効率的に検出するためのアルゴリズムである。この手法は、異常データが全体のデータセット中で数が少なく、他の正常データから離れて存在するという特性に基づいて設計されている。データをランダムに分割していく過程で、異常データは正常データに比べて相対的に早く孤立するため、データが孤立するまでに必要な分割回数に着目することで、異常データを検出できる。IFの実行は以下のステップに分かれる。
+Isolation Forest（以下、IF）は、Liuらが提案した\cite{Liu2008-bc}、外れ値を効率的に検出するためのアルゴリズムである。この手法は、異常データの数は少なく、他の正常データから離れて存在するという特性に基づいて設計されている。データをランダムに分割していく過程で、異常データは正常データに比べて相対的に早く孤立するため、データが孤立するまでに必要な分割回数に着目することで、異常データを検出できる。IFの実行は以下のステップに分かれる。
 
 \subsubsection{データの分割}
 
-IFは、ランダムに選んだ特徴量を基にデータを分割する。具体的には、選んだ特徴量のランダムな値を閾値として使用し、その閾値より大きいグループと小さいグループにデータを二分割する。この分割を全てのデータが孤立するまで繰り返し行い、一つの決定木(ITree)を作成する。このプロセスが終了したら、複数の決定木を構築する。
+IFは、ランダムに選んだ特徴量を基にデータを分割する。具体的には、選んだ特徴量のランダムな値を閾値として使用し、その閾値より大きいグループと小さいグループにデータを二分割する。この分割を全てのデータが孤立するまで繰り返し行い、一つの決定木($iTree$)を作成する。このプロセスが終了したら、複数の決定木を構築する。
 
 \subsubsection{異常スコアの算出}
 
-異常スコアは、データ点が生成されたiTreeの枝をたどって到達するまでのパス長に基づいて計算される。パス長が短いほど、そのデータ点は異常である可能性が高い。異常スコア$V(x,n)$の計算式は式\ref{eq:anomaly_score}の通りである。
+異常スコアは、データ点が生成された$iTree$の枝をたどって到達するまでのパス長に基づいて計算される。パス長が短いほど、そのデータ点は異常である可能性が高い。異常スコア$V(x,n)$の計算式は式\ref{eq:anomaly_score}の通りである。
 
 
 \begin{equation}
@@ -92,15 +90,15 @@ IFは、ランダムに選んだ特徴量を基にデータを分割する。具
 \end{equation}
 
 
-ここで、E(h(x)) はデータ点 x の平均パス長、c(n) はデータセットのサイズ n に依存する調整用の定数である。
+ここで$E(h(x))$はデータ点$x$の平均パス長$c(n)$はデータセットのサイズ$n$に依存する調整用の定数である。
 
 \subsubsection{異常判定}
+計算された異常スコアを使用して、異常検知を行う。scikit-learnのライブラリを用いた実装では、パラメータ `contamination` で閾値を設定する。`contamination` は float 型で $(0, 0.5]$ の間の値をとり、データセット内で異常と見なすデータの割合を指定する。このパラメータに基づいて、トレーニングデータ内で指定された割合に相当するスコアの値が閾値として設定される。この閾値を超えるスコアを持つデータは異常と判定される。
 
-計算された異常スコアを使用して、異常検知を行う。一般的には、トレーニングデータにおける異常スコアの上位10\%を閾値として設定する。この閾値を超えるスコアを持つデータは異常と判定される
 
 
 \subsection{IDSの概要}
-本研究では、小規模なIoT環境に適したIntrusion Detection System（IDS）の設計について検討する。具体的には、Isolation Forestを用いた異常検知手法が提案され、その有効性を評価する。
+本研究では、小規模なIoT環境に適したIntrusion Detection System（IDS）の設計について検討する。具体的には、IFを用いた異常検知手法が提案され、その有効性を評価する。
 
 \subsection{全体の設計}
 IDSの設計は以下の3つのセクションに分けられる
@@ -118,7 +116,7 @@ IDSの設計は以下の3つのセクションに分けられる
     \item \textbf{異常判定}
         \begin{itemize}
             \item IFを用いて通信が攻撃通信であるかを判定する。
-            \item 特徴量の選択後、Isolation Forestで異常検知を行う。
+            \item 特徴量の選択後、IFで異常検知を行う。
         \end{itemize}
 \end{enumerate}
 
@@ -128,7 +126,7 @@ IDSの設計は以下の3つのセクションに分けられる
 
 \subsubsection{データの前処理}
 
-実装の初段階では、判定に不適切な特徴量、例えば時間やIPアドレスなどの無関係な特徴量を削除する。次に、Isolation Forestが数値データのみを入力として受け付けるため、カテゴリカルデータを数値データに変換する必要がある。この変換にはone-hotエンコーディングを利用し、異なるカテゴリの特徴を個別の数値特徴として表現する。さらに、データセットは攻撃データと正常データに事前に分割され、それぞれ別のデータセットとして扱われる。
+実装の初段階では、判定に不適切な特徴量、例えば時間やIPアドレスなどの無関係な特徴量を削除する。次に、IFが数値データのみを入力として受け付けるため、カテゴリカルデータを数値データに変換する必要がある。この変換にはone-hotエンコーディングを利用し、異なるカテゴリの特徴を個別の数値特徴として表現する。さらに、データセットは攻撃データと正常データに事前に分割され、それぞれ別のデータセットとして扱われる。
 
 \subsubsection{特徴量選択}
 
@@ -248,17 +246,33 @@ IFを用いた異常検知手法では、攻撃データと正常データのそ
     \item \textbf{NSL-KDD}
         KDDCUP99の問題点を解決するために提案されたデータセットであり、データの冗長性や攻撃データの割合を調整したもの。
     \item \textbf{UNSW-NB15}
-        既存のデータセットの問題点を解決し、現代のネットワークトラフィックと低フットプリント攻撃を包括的に反映するために作成されたデータセット。
+        既存のデータセットの問題点を解決し、現代のネットワークトラフィックを包括的に反映するために作成されたデータセット。
 \end{enumerate}
+
 
 \subsubsection{評価指標}
 本研究では、以下の2つの評価指標を用いてモデルの性能を評価した。
 
 \begin{enumerate}
-    \item \textbf{Accuracy}
-        正確度を示し、予測が実際のクラスと一致する割合を示す。
-    \item \textbf{F1-score}
-        PrecisionとRecallの調和平均を示す。
+    \item \textbf{Accuracy}\\
+        正確度を示し、予測が実際のクラスと一致する割合を示す。Accuracyは以下の式で定義される。
+        \begin{equation}
+            \mathrm{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+        \end{equation}
+        ここで、TPはTrue Positive、TNはTrue Negative、FPはFalse Positive、FNはFalse Negativeを表す。
+    
+    \item \textbf{F1-score}\\
+        PrecisionとRecallの調和平均を示す。F1-scoreは以下の式で定義される。
+        \begin{equation}
+            \mathrm{F1\mathchar`-score} = \frac{2 \times \mathrm{Precision} \times \mathrm{Recall}}{\mathrm{Precision} + \mathrm{Recall}}
+        \end{equation}
+        PrecisionとRecallはそれぞれ以下の式で定義される。
+        \begin{equation}
+            \mathrm{Precision} = \frac{TP}{TP + FP}
+        \end{equation}
+        \begin{equation}
+            \mathrm{Recall} = \frac{TP}{TP + FN}
+        \end{equation}
 \end{enumerate}
 
 \subsection{結果}
@@ -295,9 +309,9 @@ IFを用いた異常検知手法では、攻撃データと正常データのそ
         \hline\hline
         Model & Accuracy & F1 \\
         \hline
-        特徴量選択なし, 閾値ベース & 0.7506 & 0.7526 \\
+        特徴量選択なし, 閾値ベース\cite{AbuAlghanam2023-sx} & 0.7506 & 0.7526 \\
         特徴量選択なし, 提案手法 & 0.8685 & 0.8666 \\
-        特徴量選択あり, 閾値ベース & 0.8440 & 0.8817 \\
+        特徴量選択あり, 閾値ベース\cite{AbuAlghanam2023-sx} & 0.8440 & 0.8817 \\
         特徴量選択あり, 提案手法 & 0.9112 & 0.9082 \\
         \hline
     \end{tabular}
@@ -306,17 +320,17 @@ IFを用いた異常検知手法では、攻撃データと正常データのそ
 
 \begin{table}[tb]
     \caption{NSLでのモデルの性能評価結果（和文）}
-    \ecaption{Performance evaluation results of models in NSL Dataset(English).}
+    \ecaption{Performance evaluation results of models in NSL Dataset (English).}
     \centering
     \footnotesize
     \begin{tabular}{lcc}
         \hline\hline
         Model & Accuracy & F1 \\
         \hline
-        特徴量選択なし & 0.7873 & 0.8171 \\
-        特徴量選択なし、提案手法 & - & -\\ 
-        特徴量選択あり & 0.8466 & 0.8775 \\
-        特徴量選択あり、提案手法 & 0.9452 & 0.9452 \\
+        特徴量選択なし, 閾値ベース\cite{AbuAlghanam2023-sx} & 0.7873 & 0.8171 \\
+        特徴量選択なし, 提案手法 & 0.9370 & 0.9369 \\ 
+        特徴量選択あり, 閾値ベース\cite{AbuAlghanam2023-sx} & 0.8466 & 0.8775 \\
+        特徴量選択あり, 提案手法 & 0.9452 & 0.9452 \\
         \hline
     \end{tabular}
     \label{tab:model_performance_NSL}
