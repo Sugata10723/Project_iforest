@@ -147,53 +147,48 @@ IFを異常検知手法として使用する際にどのような問題がある
 使用するデモデータは、(2.5, 2.5)と(-2.5, -2.5)を中心とした
 正常データ群と、10から-10の範囲に一様に分布した異常データ群からなる．二次元の場合のデモデータを図\ref{fig:demodata}に示す．
 
-\begin{figure}[tb]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/demodata.eps}
-    \caption{デモデータに関する図の説明（和文）}
-    \ecaption{Description of the dim\_vs\_accu figure (English).}
+    \caption{デモデータの2次元グラフ}
     \label{fig:demodata}
 \end{figure}
 
 \subsubsection{特徴量数と精度の関係}
 はじめに、デモデータと特徴量数の関係を調査した．図\ref{fig:dim_vs_accu}に示すように、特徴量数が増えるにつれて、異常検知の精度が単調に向上することがわかった．また、精度ののびは増加に反比例して緩やかになっていることもわかる。ゆえに、IFは目標とする精度に対して十分な特徴量数が存在すると言える。
 
-\begin{figure}[tb]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/dim_vs_accu.eps}
-    \caption{dim\_vs\_accuに関する図の説明（和文）}
-    \ecaption{Description of the dim\_vs\_accu figure (English).}
+    \caption{判定に有効な特徴量数とIFの精度の関係}
     \label{fig:dim_vs_accu}
 \end{figure}
 
 \subsubsection{ノイズ特徴量の影響}
 続いて、デモデータにノイズ特徴量を含めたときの精度の悪化について調査した。パケット通信を監視して得られたデータセットの全ての特徴が、異常検知に有効なわけではない。そして、IFは特徴量同士の重みづけを行わないため、判定に有効でない特徴量が混ざると精度が低下すると考えられる。図\ref{fig:noise_accu}に示すように、ノイズとなる特徴量が混ざると精度が低下することがわかった。また、今回の実験の場合だと、ノイズ特徴量が判定に有効な特徴量数の2倍以上になると、精度が急激に低下することがわかった。
 
-\begin{figure}[tb]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/noise_accu.eps}
-    \caption{noise\_accuに関する図の説明（和文）}
-    \ecaption{Description of the noise\_accu figure (English).}
+    \caption{ノイズ特徴量の精度に対する影響}
     \label{fig:noise_accu}
 \end{figure}
 
 \subsubsection{重要度に基づいたノイズ特徴量の除去}
 前の実験から、データセットからノイズとなる特徴量を取り除くことが重要であると考えられる。ところで、IFはツリーベースの異常検知手法である。そこで、同じくツリーベースのRandam Forestから特徴の重要度を算出すれば、ノイズとなる特徴量を取り除けるのではないかと考えた。図\ref{fig:select_noise}は、Random Forestで算出した特徴量の重要度を表している。このグラフは、ノイズ特徴量を判別できていることがわかる。そして、実際にノイズ特徴量を取り除いた場合の精度を調査したところ、精度は0.872\%から0.945\%まで向上した。この結果から、Feature Importanceによる特徴量選択手法は精度の向上に有効ではないかと考えた。
 
-\begin{figure}[tb]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/select_noise.eps}
-    \caption{select\_noiseに関する図の説明（和文）}
-    \ecaption{Description of the select\_noise figure (English).}
+    \caption{Random Forestで算出した特徴量の重要度}
     \label{fig:select_noise}
 \end{figure}
 
 \subsection{異常検知の境界線の問題}
 IFを用いた異常検知手法では、攻撃データと正常データのそれぞれでトレーニングされたサブシステムが異常スコアを算出し、これらの結果を組み合わせて最終的な判定を行う。AbuAlgahamらの研究では、表\ref{tab:combination}のようにそれぞれの判定器の結果を組み合わせて判定を行っていた。
 
-\begin{table}[tb]
+\begin{table}[ht]
     \caption{組み合わせアルゴリズム（和文）}
-    \ecaption{combination algorithm (English).}
     \centering
     \footnotesize
     \begin{tabular}{ccc}
@@ -211,9 +206,24 @@ IFを用いた異常検知手法では、攻撃データと正常データのそ
 
 しかし、表\ref{tab:combination}のようなマッピングに基づく判定手法は、以下の2つの問題を抱えている。
 \begin{itemize}
-\item 各判定器の異常スコアの閾値を手動で設定する必要があること。
-\item 異常判定の境界線が垂直であるため、異常スコアの分布によっては誤判定が多くなること。
+    \item 各判定器の異常スコアの閾値を手動で設定する必要があること。
+    \item 異常判定の境界線が垂直であるため、異常スコアの分布によっては誤判定が多くなること。
 \end{itemize}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{pictures/eps/UNSW2.eps}
+    \caption{UNSWにおける従来手法による判定結果}
+    \label{fig:UNSW2}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{pictures/eps/NSL2.eps}
+    \caption{NSLにおける従来手法による判定結果}
+    \label{fig:NSL2}
+\end{figure}
+
 実際に異常スコアの分布を調査したところ、図\ref{fig:UNSW1}と図\ref{fig:NSL1}で示されるように、異常データと正常データの境界線は対角方向であることが確認された。このような場合、垂直に分割しては正確な判定ができない。
 
 そこで、本研究では、異常スコアの分布に応じて適切な判定ができるよう、異常検知の境界線をロジスティック回帰を用いて決定する手法を提案する。この手法では、それぞれのサブシステムの異常スコアを入力とし、ロジスティック回帰によって最終的な判定を行う。この手法を用いることで、IFの閾値を設定する必要がなく、閾値による垂直な分割よりも正確な判定が行えるという利点がある。
@@ -287,25 +297,22 @@ IFを用いた異常検知手法では、攻撃データと正常データのそ
 
 図\ref{fig:NSL1}から、データセットNSLでは、右下と左下にそれぞれ攻撃データと正常データが集中しており、適切に行われている判定が多いことがわかる。同様に、2つのデータの境界線が対角線方向に位置しているため、ロジスティック回帰を用いることで精度が向上する可能性がある。
 
-\begin{figure}[tb]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/UNSW1.eps}
-    \caption{UNSW1（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
+    \caption{UNSWにおける訓練データの正常通信と攻撃通信の分布}
     \label{fig:UNSW1}
 \end{figure}
 
-\begin{figure}[tb]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/NSL1.eps}
-    \caption{NSL1（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
+    \caption{NSLにおける訓練データの正常通信と攻撃通信の分布}
     \label{fig:NSL1}
 \end{figure}
 
-\begin{table}[tb]
+\begin{table}[ht]
     \caption{UNSWでのモデルの性能評価結果（和文）}
-    \ecaption{Performance evaluation results of models in UNSW Dataset(English).}
     \centering
     \footnotesize
     \begin{tabular}{lcccc}
@@ -321,9 +328,8 @@ IFを用いた異常検知手法では、攻撃データと正常データのそ
     \label{tab:model_performance_UNSW}
 \end{table}
 
-\begin{table}[tb]
+\begin{table}[ht]
     \caption{NSLでのモデルの性能評価結果（和文）}
-    \ecaption{Performance evaluation results of models in NSL Dataset (English).}
     \centering
     \footnotesize
     \begin{tabular}{lcc}
@@ -344,35 +350,17 @@ IFを用いた異常検知手法では、攻撃データと正常データのそ
 
 \subsection{考察}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/UNSW2.eps}
-    \caption{UNSW2（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:UNSW2}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/NSL2.eps}
-    \caption{NSL2（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
-    \label{fig:NSL2}
-\end{figure}
-
-\begin{figure}
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/UNSW3.eps}
-    \caption{UNSW3（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
+    \caption{UNSWにおける提案手法による判定結果}
     \label{fig:UNSW3}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/NSL3.eps}
-    \caption{NSL3（和文）}
-    \ecaption{Description of the collectness\_UNSW figure (English).}
+    \caption{NSLにおける提案手法による判定結果}
     \label{fig:NSL3}
 \end{figure}
 
@@ -380,11 +368,11 @@ IFを用いた異常検知手法では、攻撃データと正常データのそ
 
 また、今回のアプローチが適用できる範囲についても考察が必要である。異常スコアの分布が明確に分かれている場合にはこの手法が効果的であるが、攻撃通信と正常通信が十分に分離されていない場合や、異常スコアの境界線が曲面状になっている場合には、別の特徴量選択手法の採用や異なる機械学習アルゴリズムの適用など、さらなる工夫が必要とされる。実際、図\ref{fig:UNSW1}をみると、攻撃通信の中に
 
-図\ref{fig:NSL1}をみると、攻撃通信の中に
-
 攻撃と正常が概ね分離されている
 
-と図\ref{fig:NSL1}で示される2つのデータセットを比較すると、NSLデータセットはUNSWデータセットよりも攻撃通信と正常通信が明確に分離されていることが観察される。その結果、検知精度に関しても、NSLデータセットはUNSWデータセットに対して高い精度を示している。このことから、異常スコアの分布が明確に分かれている場合には、提案手法が有効であることが示唆される。
+と図\ref{fig:NSL1}で示される2つのデータセットを比較すると、NSLデータセットはUNSWデータセットよりも攻撃通信と正常通信が明確に分離されていることが観察される。
+
+その結果、検知精度に関しても、NSLデータセットはUNSWデータセットに対して高い精度を示している。このことから、異常スコアの分布が明確に分かれている場合には、提案手法が有効であることが示唆される。
 
 さらに、ロジスティック回帰を適用する際のコストや計算量に関するトレードオフも存在する。IF単体での異常検知に比べ、ロジスティック回帰を用いることでモデル構築にかかる計算時間が増加することが懸念される。
 
@@ -397,7 +385,7 @@ IFを用いた異常検知手法では、攻撃データと正常データのそ
 おわりにを書く.
 
 \begin{acknowledgment}
-謝辞を書く.\cite{AbuAlghanam2023-sx}
+謝辞を書く.
 \end{acknowledgment}
 
 
