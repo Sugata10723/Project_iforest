@@ -105,7 +105,7 @@ AbuAlghanamらが提案したIDSの設計\cite{AbuAlghanam2023-sx}は,図\ref{fi
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{pictures/eps/system.eps}
+    \includegraphics[width=0.9\linewidth]{pictures/eps/system.eps}
     \caption{AbuAlghanamらのIDSの全体の設計(出典:\cite{AbuAlghanam2023-sx})}
     \label{fig:IDS}
 \end{figure}
@@ -118,7 +118,7 @@ AbuAlghanamらが提案したIDSの設計\cite{AbuAlghanam2023-sx}は,図\ref{fi
 AbuAlghanamらの研究では、特徴量選択の手法として主成分分析（PCA）および特徴重要度（FI）法を使用した\cite{AbuAlghanam2023-sx}との記述があったが、具体的な手法については記載されていなかった。本研究では特徴量のRandom Forestアルゴリズムを用いて重要度を計算し、設定された閾値を超える特徴量のみを選択した。
 
 \subsubsection{異常判定}
-AbuAlghanamらの手法では、データを攻撃通信と正常通信の2つに分割し、それぞれに対してIFのトレーニングを行う。この2つのトレーニングされたIFをサブシステムと呼ぶ。2つのサブシステムは各データに対して異常スコアを算出する。異常スコアはどの程度データが異常であるかを定量的に表す指標である。その後、設定した閾値を超える異常スコアを持つデータをAnomalyと判定する。AbuAlghanamらの手法では、最終的な判定は2つのサブシステムの判定を表\ref{tab:combination}のように組み合わせることで行われる。本研究のIDSでは、この判定の組み合わせ手法の代わりににロジスティック回帰を用いた判定アルゴリズムを採用した。
+AbuAlghanamらの手法では、データを攻撃通信と正常通信の2つに分割し、それぞれに対してIFのトレーニングを行う。この2つのトレーニングされたIFをサブシステムと呼ぶ。2つのサブシステムは各データに対して異常スコアを算出する。異常スコアはどの程度データが異常であるかを定量的に表す指標である。その後、設定した閾値を超える異常スコアを持つデータをAnomalyと判定する。AbuAlghanamらの手法では、最終的な判定は2つのサブシステムの判定を表\ref{tab:combination}のように組み合わせることで行われる。本研究のIDSでは、この判定の組み合わせ手法の代わりにロジスティック回帰を用いた判定アルゴリズムを採用した。
 
 \begin{table}[ht]
     \caption{AbuAlghanamらの判定組み合わせ手法}
@@ -146,7 +146,7 @@ AbuAlghanamらの手法では、データを攻撃通信と正常通信の2つ�
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{pictures/eps/demodata.eps}
+    \includegraphics[width=0.9\linewidth]{pictures/eps/demodata.eps}
     \caption{デモデータの2次元グラフ}
     \label{fig:demodata}
 \end{figure}
@@ -156,27 +156,27 @@ AbuAlghanamらの手法では、データを攻撃通信と正常通信の2つ�
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{pictures/eps/dim_vs_accu.eps}
+    \includegraphics[width=0.9\linewidth]{pictures/eps/dim_vs_accu.eps}
     \caption{判定に有効な特徴量数とIFの精度の関係}
     \label{fig:dim_vs_accu}
 \end{figure}
 
 \subsubsection{ノイズ特徴量の影響}
-続いて、デモデータにノイズ特徴量を含めたときの精度の悪化について調査した。パケット通信を監視して得られたデータセットの全ての特徴が、異常検知に有効なわけではない。そして、IFは特徴量同士の重みづけを行わないため、判定に有効でない特徴量が混ざると精度が低下すると考えられる。図\ref{fig:noise_accu}に示すように、ノイズとなる特徴量が混ざると精度が低下することがわかった。また、今回の実験の場合だと、ノイズ特徴量が判定に有効な特徴量数の2倍以上になると、精度が急激に低下することがわかった。
+続いて、デモデータにノイズ特徴量を含めたときの精度の悪化について調査した。パケット通信を監視して得られたデータセットの全ての特徴が、異常検知に有効なわけではない。IFは特徴量同士の重みづけを行わないため、これらの判定に有効でない特徴量が混ざると精度が低下すると考えられる。そこで、デモデータにノイズ特徴量を含めていき、精度の変化を調査した。結果は図\ref{fig:noise_accu}に示すように、ノイズとなる特徴量が混ざると精度が低下することがわかった。また、今回の実験の場合だと、ノイズ特徴量が判定に有効な特徴量数の2倍以上になると、精度が急激に低下することがわかった。
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{pictures/eps/noise_accu.eps}
+    \includegraphics[width=0.9\linewidth]{pictures/eps/noise_accu.eps}
     \caption{ノイズ特徴量の精度に対する影響}
     \label{fig:noise_accu}
 \end{figure}
 
 \subsubsection{重要度に基づいたノイズ特徴量の除去}
-前の実験から、データセットからノイズとなる特徴量を取り除くことが重要であると考えられる。ところで、IFはツリーベースの異常検知手法である。そこで、同じくツリーベースのRandam Forestから特徴の重要度を算出すれば、ノイズとなる特徴量を取り除けるのではないかと考えた。図\ref{fig:select_noise}は、Random Forestで算出した特徴量の重要度を表している。このグラフは、ノイズ特徴量を判別できていることがわかる。そして、実際にノイズ特徴量を取り除いた場合の精度を調査したところ、精度は0.872\%から0.945\%まで向上した。この結果から、Feature Importanceによる特徴量選択手法は精度の向上に有効ではないかと考えた。
+前節の実験から、データセットからノイズとなる特徴量を取り除くことが重要であると考えられる。ところで、IFはツリーベースの異常検知手法である。そこで、同じくツリーベースのRandam Forestから特徴の重要度を参照すれば、ノイズとなる特徴量を取り除けるのではないかと考えた。図\ref{fig:select_noise}は、Random Forestで算出した特徴量の重要度を表している。このグラフは、ノイズ特徴量を判別できていることがわかる。そして、実際にノイズ特徴量を取り除いた場合の精度を調査したところ、精度は0.872\%から0.945\%まで向上した。この結果から、Feature Importanceによる特徴量選択手法は精度の向上に有効ではないかと考えた。
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{pictures/eps/select_noise.eps}
+    \includegraphics[width=0.9\linewidth]{pictures/eps/select_noise.eps}
     \caption{Random Forestで算出した特徴量の重要度}
     \label{fig:select_noise}
 \end{figure}
@@ -193,32 +193,38 @@ AbuAlghanamらが提案したIFを用いた異常検知手法\cite{AbuAlghanam20
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{pictures/eps/UNSW-NB151.eps}
-    \caption{UNSW-NB15における訓練データの異常スコア分布}
-    \label{fig:UNSW-NB151}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/NSL-KDD1.eps}
-    \caption{NSL-KDDにおける訓練データの異常スコア分布}
-    \label{fig:NSL-KDD1}
+    \begin{minipage}{0.9\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{pictures/eps/UNSW-NB151.eps}
+        \caption{UNSW-NB15における訓練データの異常スコア分布}
+        \label{fig:UNSW-NB151}
+    \end{minipage}
+    \vfill{}
+    \begin{minipage}{0.9\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{pictures/eps/NSL-KDD1.eps}
+        \caption{NSL-KDDにおける訓練データの異常スコア分布}
+        \label{fig:NSL-KDD1}
+    \end{minipage}
 \end{figure}
 
 このような場合、AbuAlghanamらの手法\cite{AbuAlghanam2023-sx}のように、垂直に分割しては誤検知が多く発生してしまう問題がある。図\ref{fig:UNSW-NB152}と図\ref{fig:NSL-KDD2}は、AbuAlghanamらの手法による異常判定結果を示しているが、垂直に分割する手法では、異常データが多く誤検知されていることがわかる。
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{pictures/eps/UNSW-NB152.eps}
-    \caption{UNSW-NB15におけるAbuAlghanamらの判定手法の結果}
-    \label{fig:UNSW-NB152}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/NSL-KDD2.eps}
-    \caption{NSL-KDDにおけるAbuAlghanamらの判定手法の結果}
-    \label{fig:NSL-KDD2}
+    \begin{minipage}{0.9\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{pictures/eps/UNSW-NB152.eps}
+        \caption{UNSW-NB15におけるAbuAlghanamらの判定手法}
+        \label{fig:UNSW-NB152}
+    \end{minipage}
+    \vfill{} 
+    \begin{minipage}{0.9\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{pictures/eps/NSL-KDD2.eps}
+        \caption{NSL-KDDにおけるAbuAlghanamらの判定手法}
+        \label{fig:NSL-KDD2}
+    \end{minipage}
 \end{figure}
 
 この問題を解決するために、ロジスティック回帰を用いて異常判定の境界線を斜めに設定する手法を4章で提案する。
@@ -412,16 +418,19 @@ UNSW-NB15の結果は表\ref{tab:model_performance_UNSW-NB15},NSL-KDDの結果�
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{pictures/eps/UNSW-NB153.eps}
-    \caption{UNSW-NB15における提案手法による結果}
-    \label{fig:UNSW-NB153}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/NSL-KDD3.eps}
-    \caption{NSL-KDDにおける提案手法による結果}
-    \label{fig:NSL-KDD3}
+    \begin{minipage}{0.9\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{pictures/eps/UNSW-NB153.eps}
+        \caption{UNSW-NB15における提案手法による結果}
+        \label{fig:UNSW-NB153}
+    \end{minipage}
+    \vfill{} 
+    \begin{minipage}{0.9\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{pictures/eps/NSL-KDD3.eps}
+        \caption{NSL-KDDにおける提案手法による結果}
+        \label{fig:NSL-KDD3}
+    \end{minipage}
 \end{figure}
 
 まず、ロジスティック回帰を導入することで、異常スコアの分布が斜めに広がる場合により正確な境界を引くことが可能になった。図\ref{fig:UNSW-NB152}と図\ref{fig:NSL-KDD2}はそれぞれ、2つのサブシステムの判定結果を組み合わせた従来の手法の判定結果を示しており、図\ref{fig:UNSW-NB153}と図\ref{fig:NSL-KDD3}はロジスティック回帰を用いた提案手法の判定結果を示している。図\ref{fig:UNSW-NB152}と図\ref{fig:NSL-KDD2}から、2つのサブシステムの判定を組み合わせた手法において、どれだけ閾値を適切に設定したとしても、異常スコアの分布が斜めに広がる場合には誤判定が多く発生することがわかる。一方、図\ref{fig:UNSW-NB153}と図\ref{fig:NSL-KDD3}からは、ロジスティック回帰を用いた手法が、斜めに広がる異常スコアの分布に対しても、より正確に判定できることが確認できる。従来の垂直な分割では誤判定が多発するケースにおいても、精度の向上が見込めることが実証された。
