@@ -98,10 +98,18 @@ IFは、ランダムに選んだ特徴量を基にデータを分割する。具
 
 
 \subsection{AbuAlghanamらの提案手法}
-本研究では、小規模なIoT環境に適したIDSの設計を目指す。そのため、AbuAlghanamらが提案したIFを用いたIDSの手法\cite{AbuAlghanam2023-sx}を参考にした。
+本研究では、小規模なIoT環境に適したIDSの設計を目指す。そこで、小規模環境でも軽量に動作するIFを用いたAbAlghanamらが提案したIFを用いたIDSの手法\cite{AbuAlghanam2023-sx}に注目した。参考にしIDSの設計を行った。設計したIDSの概要は以下の通りである。
 
 \subsection{全体の設計}
 IDSの設計は以下の3つのセクションに分けられる
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{pictures/eps/system.eps}
+    \caption{IDSの全体の設計}
+    \label{fig:IDS}
+\end{figure}
+
 \begin{enumerate}
     \item \textbf{データの前処理}
         \begin{itemize}
@@ -121,7 +129,6 @@ IDSの設計は以下の3つのセクションに分けられる
 \end{enumerate}
 
 \subsection{実装}
-
 実装は以下のステップで行われる。
 
 \subsubsection{データの前処理}
