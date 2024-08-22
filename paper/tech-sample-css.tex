@@ -98,54 +98,48 @@ IFは、ランダムに選んだ特徴量を基にデータを分割する。具
 
 
 \subsection{AbuAlghanamらの提案手法}
-本研究では、小規模なIoT環境に適したIDSの設計を目指す。そこで、小規模環境でも軽量に動作するIFを用いたAbAlghanamらが提案したIFを用いたIDSの手法\cite{AbuAlghanam2023-sx}に注目した。参考にしIDSの設計を行った。設計したIDSの概要は以下の通りである。
+本研究では、小規模環境でも軽量に動作する,AbAlghanamらが提案したIFを用いたIDSの手法\cite{AbuAlghanam2023-sx}に注目し,彼らの研究を大いに参考にしIDSの設計を行った。
 
 \subsection{全体の設計}
-IDSの設計は以下の3つのセクションに分けられる
+AbuAlghanamらが提案したIDSの設計\cite{AbuAlghanam2023-sx}は,図\ref{fig:IDS}に示すように、データの前処理、特徴量選択、異常判定の3つのステップで構成される。
 
-\begin{figure}
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/system.eps}
-    \caption{IDSの全体の設計}
+    \caption{AbuAlghanamらのIDSの全体の設計(出典:\cite{AbuAlghanam2023-sx})}
     \label{fig:IDS}
 \end{figure}
 
-\begin{enumerate}
-    \item \textbf{データの前処理}
-        \begin{itemize}
-            \item 入力データを適切な形式に変換する。
-            \item 不必要な特徴量の削除やデータの標準化、ラベルエンコーディングを行う。
-        \end{itemize}
-    \item \textbf{特徴量選択}
-        \begin{itemize}
-            \item 判定に重要な特徴量を選択し、過学習を防ぎ、検知精度を向上させる。
-            \item Random Forestを用いて特徴量の重要度を算出し、重要な特徴量を選択する。
-        \end{itemize}
-    \item \textbf{異常判定}
-        \begin{itemize}
-            \item IFを用いて通信が攻撃通信であるかを判定する。
-            \item 特徴量の選択後、IFで異常検知を行う。
-        \end{itemize}
-\end{enumerate}
-
-\subsection{実装}
-実装は以下のステップで行われる。
-
 \subsubsection{データの前処理}
 
-実装の初段階では、判定に不適切な特徴量、例えば時間やIPアドレスなどの無関係な特徴量を削除する。次に、IFが数値データのみを入力として受け付けるため、カテゴリカルデータを数値データに変換する必要がある。この変換にはone-hotエンコーディングを利用し、異なるカテゴリの特徴を個別の数値特徴として表現する。さらに、データセットは攻撃データと正常データに事前に分割され、それぞれ別のデータセットとして扱われる。
+はじめにタイムスタンプやIPアドレスといった、IFで使用しない特徴量を削除する。次に、IFが数値データのみを入力として受け付けるため、カテゴリカルデータを数値データに変換する。この変換にはone-hotエンコーディングを利用し、異なるカテゴリの特徴を個別の数値特徴として表現する。さらに、データセットは攻撃データと正常データに事前に分割され、それぞれ別のデータセットとして扱われる。
 
 \subsubsection{特徴量選択}
-
-特徴量選択はRandom Forestアルゴリズムを使用して行われる。このプロセスでは、特徴量の重要度が算出され、重要度が設定された閾値を超える特徴量のみが選択される。この選択により、モデルの性能に直接影響を与える重要な特徴量を維持し、過剰適合を防ぐために不必要な特徴量は排除される。
+AbuAlghanamらの研究では、特徴量選択の手法として主成分分析（PCA）および特徴重要度（FI）法を使用した\cite{AbuAlghanam2023-sx}との記述があったが、具体的な手法については記載されていなかった。本研究では特徴量のRandom Forestアルゴリズムを用いて重要度を計算し、設定された閾値を超える特徴量のみを選択した。
 
 \subsubsection{異常判定}
+AbuAlghanamらの手法では、データを攻撃通信と正常通信の2つに分割し、それぞれに対してIFのトレーニングを行う。この2つのトレーニングされたIFをサブシステムと呼ぶ。2つのサブシステムは各データに対して異常スコアを算出する。異常スコアはどの程度データが異常であるかを定量的に表す指標である。その後、設定した閾値を超える異常スコアを持つデータをAnomalyと判定する。AbuAlghanamらの手法では、最終的な判定は2つのサブシステムの判定を表\ref{tab:combination}のように組み合わせることで行われる。本研究のIDSでは、この判定の組み合わせ手法の代わりににロジスティック回帰を用いた判定アルゴリズムを採用した。
 
-攻撃の判定では、IFを用いて攻撃通信と正常通信のデータに対して別々にトレーニングを行う。この2つのIFをサブシステムと呼ぶ。トレーニング後、それぞれのデータに対して異常スコアが算出される。異常スコアは、データがどの程度異常であるかを定量的に表す指標であり、最終的な判定は2つのサブシステムからの出力を組み合わせることで行われる。
+\begin{table}[ht]
+    \caption{AbuAlghanamらの判定組み合わせ手法}
+    \centering
+    \footnotesize
+    \begin{tabular}{ccc}
+        \hline\hline
+        正常サブシステム & 攻撃サブシステム & 判定結果\\
+        \hline
+        Normal & Anomaly & Normal \\
+        Anomaly & Normal & Anomaly \\
+        Normal & Normal & Anomaly \\
+        Anomaly & Anomaly & Unknown \\
+        \hline
+    \end{tabular}
+    \label{tab:combination}
+\end{table}
 
 
 \section{問題点の整理}
-IFを異常検知手法として適用する際にどのような問題があるのかを明らかにするための事前実験を行った．はじめにデモデータを使用してIFの挙動を確認し,その考察をもとに特徴量選択手法の提案を行なった.また、AbuAlghanamらの提案したIFを用いた異常検知手法\cite{AbuAlghanam2023-sx}の問題点を整理した。
+まず、IFを異常検知手法として適用する際にどのような問題があるのかを明らかにするため、事前実験を行った．はじめにデモデータを使用してIFの挙動を確認し,その考察をもとに特徴量選択手法の提案を行なった.また、AbuAlghanamらの提案したIFを用いた異常検知手法\cite{AbuAlghanam2023-sx}の問題点を整理した。
 
 \subsection{ノイズ特徴量が混入すると精度が悪化する問題}
 使用するデモデータは、(2.5, 2.5)と(-2.5, -2.5)を中心とした正常データ群と、10から-10の範囲に一様に分布した異常データ群からなる．二次元の場合のデモデータを図\ref{fig:demodata}に示す．
@@ -188,52 +182,51 @@ IFを異常検知手法として適用する際にどのような問題がある
 \end{figure}
 
 \subsection{異常検知の境界線の問題}
-AbuAlghanamらが提案したIFを用いた異常検知手法\cite{AbuAlghanam2023-sx}では、攻撃データと正常データのそれぞれでトレーニングされたサブシステムが異常スコアを算出し、これらの結果を表\ref{tab:combination}のように組み合わせて最終的な判定を行う。
-
-\begin{table}[ht]
-    \caption{組み合わせアルゴリズム}
-    \centering
-    \footnotesize
-    \begin{tabular}{ccc}
-        \hline\hline
-        正常サブシステム & 攻撃サブシステム & 判定結果\\
-        \hline
-        Normal & Anomaly & Normal \\
-        Anomaly & Normal & Anomaly \\
-        Normal & Normal & Anomaly \\
-        Anomaly & Anomaly & Unknown \\
-        \hline
-    \end{tabular}
-    \label{tab:combination}
-\end{table}
-
-しかし、2つのサブシステムの判定に基づいて表\ref{tab:combination}のように検知を行う従来手法は、以下の2つの問題を抱えている。
+AbuAlghanamらが提案したIFを用いた異常検知手法\cite{AbuAlghanam2023-sx}では、2つのサブシステムが異常スコアを算出し、それが閾値を超えたデータを異常と判定する。そして、この2つの判定を表\ref{tab:combination}のように組み合わせて最終的な判定を行っている。しかし、この手法は、以下の2つの問題を抱えている。
 
 \begin{itemize}
-    \item 各判定器の異常スコアの閾値を手動で設定する必要があること。
+    \item 各サブシステムの異常スコアの閾値を手動で設定する必要があること。
     \item 異常判定の境界線が垂直であるため、異常スコアの分布によっては誤判定が多くなること。
 \end{itemize}
+
+実際に異常スコアの分布を調査したところ、図\ref{fig:UNSW-NB151}と図\ref{fig:NSL-KDD1}で示されるように、異常データと正常データの境界線は対角方向になっている。
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{pictures/eps/UNSW-NB151.eps}
+    \caption{UNSW-NB15における訓練データの異常スコア分布}
+    \label{fig:UNSW-NB151}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{pictures/eps/NSL-KDD1.eps}
+    \caption{NSL-KDDにおける訓練データの異常スコア分布}
+    \label{fig:NSL-KDD1}
+\end{figure}
+
+このような場合、AbuAlghanamらの手法\cite{AbuAlghanam2023-sx}のように、垂直に分割しては誤検知が多く発生してしまう問題がある。図\ref{fig:UNSW-NB152}と図\ref{fig:NSL-KDD2}は、AbuAlghanamらの手法による異常判定結果を示しているが、垂直に分割する手法では、異常データが多く誤検知されていることがわかる。
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/UNSW-NB152.eps}
-    \caption{UNSW-NB15における従来手法による判定結果}
+    \caption{UNSW-NB15におけるAbuAlghanamらの判定手法の結果}
     \label{fig:UNSW-NB152}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/NSL-KDD2.eps}
-    \caption{NSL-KDDにおける従来手法による判定結果}
+    \caption{NSL-KDDにおけるAbuAlghanamらの判定手法の結果}
     \label{fig:NSL-KDD2}
 \end{figure}
 
-実際に異常スコアの分布を調査したところ、図\ref{fig:UNSW-NB151}と図\ref{fig:NSL-KDD1}で示されるように、異常データと正常データの境界線は対角方向である。このような場合、AbuAlghanamらの手法\cite{AbuAlghanam2023-sx}のように、垂直に分割しては誤検知が多く発生してしまう。
+この問題を解決するために、ロジスティック回帰を用いて異常判定の境界線を斜めに設定する手法を4章で提案する。
 
 \section{提案手法}
-3章で述べた、
+3章で述べた、以下の2つの問題
 \begin{itemize}
-    \item ノイズ特徴量がIFの精度に与える影響
+    \item ノイズ特徴量が精度に悪影響を及ぼす問題
     \item 異常検知の境界線の設定の問題
 \end{itemize}
 を解決するために、以下の2つの提案を行った。
@@ -241,11 +234,12 @@ AbuAlghanamらが提案したIFを用いた異常検知手法\cite{AbuAlghanam20
 一つは、ノイズ特徴量を取り除くための特徴量選択手法の提案である。もう一つは、異常検知の境界線が斜めに分布する場合にも適切な判定ができるよう、ロジスティック回帰を用いて境界を決定する手法の提案である。
 
 \subsection{特徴量選択手法の提案}   
-
+はじめに、scikit-learnのRandom Forestライブラリのfeature-importancesメソッドを用いて特徴量の重要度を算出する。その後、設定した閾値を超える特徴量のみを選択する。本研究では、上位10\%の特徴量を使用するように閾値を設定した。
 
 
 \subsection{ロジスティック回帰を適用した異常判定手法}
-そこで、本研究では、異常スコアの境界線が斜めに分布する場合にも適切な判定ができるよう、ロジスティック回帰を用いて境界を決定する手法を提案する。この手法では、それぞれのサブシステムの異常スコアを入力とし、ロジスティック回帰によって異常、正常の判定を行う。この手法を用いることで、IFの閾値を設定する必要がなく、閾値による垂直な分割よりも正確な判定が行えるという利点がある。
+異常スコアの境界線が斜めに分布する場合にも適切な判定ができるよう、ロジスティック回帰を用いて境界を決定する手法を提案する。
+
 
 \section{結果と考察}
 
@@ -292,6 +286,7 @@ AbuAlghanamらが提案したIFを用いた異常検知手法\cite{AbuAlghanam20
     正常データ数 & 67,343 & 56,000 \\
     攻撃データ数 & 58,629 & 119,341 \\
     特徴量数 & 43 & 45 \\
+    エンコード後の特徴量数 & 124 & 198 \\
     \hline
     \end{tabular}
 \end{table}
@@ -329,20 +324,6 @@ AbuAlghanamらが提案したIFを用いた異常検知手法\cite{AbuAlghanam20
 図\ref{fig:UNSW-NB151}をみると、UNSW-NB15ではデータが対角線方向に分布しており、2つのサブシステムの判定が相反する場合が多いことがわかる。また、右下に正常データが多く存在し、この領域の判定は適切に行われていることもわかる。攻撃データと正常データの境界線が対角方向に位置しているため、従来の垂直な分割に比べて、ロジスティック回帰を用いて斜めに分割することで精度が向上する可能性がある。
 
 図\ref{fig:NSL-KDD1}から、NSL-KDDでは、右下と左下にそれぞれ攻撃データと正常データが集中しており、適切に行われている判定が多いことがわかる。同様に、2つのデータの境界線が対角線方向に位置しているため、ロジスティック回帰を用いることで精度が向上する可能性がある。
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/UNSW-NB151.eps}
-    \caption{UNSW-NB15における訓練データの正常通信と攻撃通信の分布}
-    \label{fig:UNSW-NB151}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{pictures/eps/NSL-KDD1.eps}
-    \caption{NSL-KDDにおける訓練データの正常通信と攻撃通信の分布}
-    \label{fig:NSL-KDD1}
-\end{figure}
 
 \begin{table}[ht]
     \caption{UNSW-NB15でのモデルの性能評価結果}
@@ -386,20 +367,20 @@ UNSW-NB15の結果は表\ref{tab:model_performance_UNSW-NB15},NSL-KDDの結果�
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/UNSW-NB153.eps}
-    \caption{UNSW-NB15における提案手法による判定結果}
+    \caption{UNSW-NB15における提案手法による結果}
     \label{fig:UNSW-NB153}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{pictures/eps/NSL-KDD3.eps}
-    \caption{NSL-KDDにおける提案手法による判定結果}
+    \caption{NSL-KDDにおける提案手法による結果}
     \label{fig:NSL-KDD3}
 \end{figure}
 
 まず、ロジスティック回帰を導入することで、異常スコアの分布が斜めに広がる場合により正確な境界を引くことが可能になった。図\ref{fig:UNSW-NB152}と図\ref{fig:NSL-KDD2}はそれぞれ、2つのサブシステムの判定結果を組み合わせた従来の手法の判定結果を示しており、図\ref{fig:UNSW-NB153}と図\ref{fig:NSL-KDD3}はロジスティック回帰を用いた提案手法の判定結果を示している。図\ref{fig:UNSW-NB152}と図\ref{fig:NSL-KDD2}から、2つのサブシステムの判定を組み合わせた手法において、どれだけ閾値を適切に設定したとしても、異常スコアの分布が斜めに広がる場合には誤判定が多く発生することがわかる。一方、図\ref{fig:UNSW-NB153}と図\ref{fig:NSL-KDD3}からは、ロジスティック回帰を用いた手法が、斜めに広がる異常スコアの分布に対しても、より正確に判定できることが確認できる。従来の垂直な分割では誤判定が多発するケースにおいても、精度の向上が見込めることが実証された。
 
-また、今回のアプローチが適用できる範囲についても考察が必要である。異常スコアの分布において、正常な通信と攻撃通信が直線的に分離できている場合、この手法は効果的である。しかし、攻撃通信と正常な通信が十分に分離されていない場合や、境界線が曲線状になっている場合には、判定精度が低くなる可能性がある。実際、図\ref{fig:UNSW-NB151}を見ると、斜めに分布した攻撃通信の中に正常な通信が多く混ざっている。一方で図\ref{fig:NSL-KDD1}では、概ね攻撃通信と正常な通信が分離され、お互いが混ざりあう部分が比較的小さい。これら2つのデータセットを比較すると、NSL-KDDはUNSW-NB15よりも高い検知精度を示している。このように、異常スコアの分布によっては効果的でない場合があり、別の特徴量選択手法の採用や異なる機械学習アルゴリズムの適用など、さらなる工夫が必要となる可能性がある。
+また、本アプローチが適用できる範囲についても考察が必要である。異常スコアの分布において、正常な通信と攻撃通信が直線的に分離できている場合、この手法は効果的である。しかし、攻撃通信と正常な通信が十分に分離されていない場合や、境界線が曲線状になっている場合には、判定精度が低くなる可能性がある。実際、図\ref{fig:UNSW-NB151}を見ると、斜めに分布した攻撃通信の中に正常な通信が多く混ざっている。一方で図\ref{fig:NSL-KDD1}では、概ね攻撃通信と正常な通信が分離され、お互いが混ざりあう部分が比較的小さい。これら2つのデータセットを比較すると、NSL-KDDはUNSW-NB15よりも高い検知精度を示している。このように、異常スコアの分布によっては効果的でない場合があり、別の特徴量選択手法の採用や異なる機械学習アルゴリズムの適用など、さらなる工夫が必要となる可能性がある。
 
 さらに、ロジスティック回帰を適用する際のコストや計算量に関するトレードオフも存在する。IF単体での異常検知に比べ、ロジスティック回帰を用いることでモデル構築にかかる計算時間が増加することが懸念される。
 
