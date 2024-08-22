@@ -38,7 +38,7 @@ Global Scientific Information and Computing Center}
 %\author{Hanako Anzen}{XX, YY, ZZ}
 
 \begin{abstract}
-    本論文では, Isolation Forestを用いたIoT向け異常検知手法の改善を行った. この研究の背景には, IoT（Internet of Things）の普及がある. 2030年には約300億台ものデバイスが利用されると予測されており, すべてのIoT機器のセキュリティ確保が重要な課題となっている. 特に, 2016年のMirai型マルウェアによるDDoS攻撃は, その必要性を浮き彫りにした. 本研究では, 専門的なセキュリティ対策が難しい家庭内ネットワークなどの小規模環境に着目し, 軽量で高速な異常検知システムの提案を目指した. AbuAlghanamらが提案したIsolation Forestを用いたIoT向けIDSは, その軽量性と高速性から今回の想定に適していると考えた. しかし, 彼らの手法には二つの問題が存在している. 第一に, 閾値を手動で設定する必要がある点, 第二に, 閾値による異常判定アルゴリズムの精度に限界がある点である. これらの課題を解決するため, 本研究では異常判定にロジスティック回帰を応用した判定アルゴリズムを提案する. 提案手法を二つのデータセットで実験した結果, 精度がそれぞれ82.1\%から90.7\%, 85.7\%から94.9\%に改善したことを確認した. 
+    本論文では, Isolation Forestを用いたIoT向け異常検知手法の改善を行った. この研究の背景には, IoT（Internet of Things）の普及があり, すべてのIoT機器のセキュリティ確保が重要な課題となっている. 本研究では, 専門的なセキュリティ対策が難しい家庭内ネットワークなどの小規模環境に着目し, 軽量で高速な異常検知システムの提案を目指した. AbuAlghanamらが提案したIsolation Forestを用いたIoT向けIDSは, その軽量性と高速性から今回の想定に適しているが, 二つの問題が存在する. 閾値を手動で設定する必要がある点と, 閾値による異常判定アルゴリズムの精度に限界がある点である. これらの課題を解決するため, 本研究では異常判定にロジスティック回帰を応用した判定アルゴリズムを提案する. 提案手法を二つのデータセットで実験した結果, 精度がそれぞれ82.1\%から90.7\%, 85.7\%から94.9\%に改善したことを確認した. 
 \end{abstract}
 
 %% キーワード (1--5単語) の記載は任意．
@@ -48,7 +48,8 @@ Isolation Forest， IoT， IDS， 異常検知
 \end{jkeyword}
 
 \begin{eabstract}
-    This paper presents an enhancement of the anomaly detection method for IoT using Isolation Forest. The background of this research is the widespread adoption of the Internet of Things (IoT). By 2030, it is predicted that approximately 30 billion devices will be in use, making the security of all IoT devices a critical issue. The necessity of such security measures was particularly highlighted by the DDoS attacks carried out by the Mirai malware in 2016. This study aims to propose a lightweight and fast anomaly detection system, particularly suited for small-scale environments such as home networks, where implementing specialized security measures is challenging.The IoT-oriented IDS using Isolation Forest proposed by AbuAlghanam et al. was considered suitable for our scenario due to its lightweight and fast nature. However, their method has two major issues: the need to manually set thresholds and the limited accuracy of the anomaly detection algorithm based on these thresholds. To address these challenges, this study proposes a detection algorithm that applies logistic regression to anomaly detection. Experimental results on two datasets showed that the accuracy improved from 82.1\% to 90.7\% and from 85.7\% to 94.9\%, respectively.
+    In this paper, we propose an improvement to the anomaly detection method for IoT using Isolation Forest. The background of this study lies in the widespread adoption of the Internet of Things (IoT), where ensuring the security of all IoT devices has become a critical issue. This research aims to propose a lightweight and fast anomaly detection system, particularly suited for small-scale environments such as home networks, where implementing specialized security measures is challenging. The IoT-oriented IDS using Isolation Forest proposed by AbuAlghanam et al. is suitable for this scenario due to its lightweight and fast nature. However, it has two major issues: the need for manual threshold setting and the limited accuracy of the anomaly detection algorithm based on these thresholds. To address these challenges, we propose a detection algorithm that applies logistic regression to anomaly detection. Experimental results on two datasets showed that the accuracy improved from 82.1\% to 90.7\% and from 85.7\% to 94.9\%, respectively.
+
 \end{eabstract}
 
 %% the following keyword part is optional and can be omitted.
