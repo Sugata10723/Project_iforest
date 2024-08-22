@@ -234,11 +234,57 @@ AbuAlghanamらが提案したIFを用いた異常検知手法\cite{AbuAlghanam20
 一つは、ノイズ特徴量を取り除くための特徴量選択手法の提案である。もう一つは、異常検知の境界線が斜めに分布する場合にも適切な判定ができるよう、ロジスティック回帰を用いて境界を決定する手法の提案である。
 
 \subsection{特徴量選択手法の提案}   
-はじめに、scikit-learnのRandom Forestライブラリのfeature-importancesメソッドを用いて特徴量の重要度を算出する。その後、設定した閾値を超える特徴量のみを選択する。本研究では、上位10\%の特徴量を使用するように閾値を設定した。
+本手法の疑似コードは表\ref{tab:feature_selection}の通りである。まず、Random Forestを用いて特徴量の重要度を算出する。次に、特徴量の重要度の上位10\%を選択し、新しいデータセットを作成する。実装には、scikit-learnのライブラリを用いた\cite{scikit-learn}。
+
+\begin{table}[h!]
+    \centering
+    \caption{特徴量選択手法の擬似コード}
+    \begin{tabular}{|l|}
+    \hline
+    \# Load training data \\
+       \ \ \ \ data, labels = load\_data() \\ 
+    \# Initialize Random Forest model \\
+       \ \ \ \ model = RandomForest() \\ 
+    \# Train the model \\
+       \ \ \ \ model.fit(data, labels) \\ 
+    \# Calculate feature importances \\
+       \ \ \ \ feature\_importances = model.feature\_importances\_ \\ 
+    \# Select top 10\% features \\
+       \ \ \ \ threshold = np.percentile(feature\_importances, 90) \\
+       \ \ \ \ selected\_features = feature\_importances $>$ threshold \\ 
+    \# Create a new dataset with selected features \\
+       \ \ \ \ new\_data = data[:, selected\_features] \\ \hline
+    \end{tabular}
+    \label{tab:feature_selection}
+\end{table}
 
 
 \subsection{ロジスティック回帰を適用した異常判定手法}
-異常スコアの境界線が斜めに分布する場合にも適切な判定ができるよう、ロジスティック回帰を用いて境界を決定する手法を提案する。
+はじめに、2つのサブシステムで訓練データの異常スコアを算出する。次に、これらの異常スコアと訓練データのラベルを入力としてロジスティック回帰をトレーニングする。そして、テストデータの異常スコアを入力としてロジスティック回帰を適用し、異常判定を行う。疑似コードは表\ref{tab:logistic_regression}の通りである。ロジスティック回帰のパラメータは設定しておらず、scikit-learnのライブラリを用いて実装した。
+
+\begin{table}[h!]
+    \centering
+    \caption{ロジスティック回帰を適用した異常判定手法の擬似コード}
+    \begin{tabular}{|l|}
+    \hline
+    \# Calculate anomaly scores \\
+       \ \ \ \ score1 = sub1.predict(train\_data) \\
+       \ \ \ \ score2 = sub2.predict(train\_data) \\ 
+    \# Prepare training data \\
+       \ \ \ \ X\_train = np.column\_stack((score1, score2)) \\
+       \ \ \ \ y\_train = labels \\ 
+    \# Train logistic regression \\
+       \ \ \ \ clf = LogisticRegression() \\
+       \ \ \ \ clf.fit(X\_train, y\_train) \\ 
+    \# Apply to test data \\
+       \ \ \ \ test\_score1 = sub1.predict(test\_data) \\
+       \ \ \ \ test\_score2 = sub2.predict(test\_data) \\
+       \ \ \ \ X\_test = np.column\_stack((test\_score1, test\_score2)) \\
+       \ \ \ \ preds = clf.predict(X\_test) \\ 
+    \hline
+    \end{tabular}
+    \label{tab:logistic_regression}
+\end{table}
 
 
 \section{結果と考察}
@@ -246,7 +292,7 @@ AbuAlghanamらが提案したIFを用いた異常検知手法\cite{AbuAlghanam20
 \subsection{比較するアルゴリズム}
 
 本研究では、以下の2つの比較を行った。
-特徴量エンジニアリングの効果の比較を行うため、特徴量選択を行わなかった場合と、Random Forestを用いた特徴量選択手法を用いた場合の結果を比較する。また、判定の組み合わせアルゴリズムの比較には、2つのサブシステムの結果を組み合わせて最終的な判定を行う手法と、ロジスティック回帰を用いて判定を行う手法の結果を比較した。
+特徴量選択手法の効果の比較を行うため、特徴量選択を行わなかった場合と、Random Forestを用いた特徴量選択手法を用いた場合の結果を比較する。また、判定の組み合わせアルゴリズムの比較には、AbuAlghanamらの2つのサブシステムの判定を組み合わせて検知を行う手法\cite{AbuAlghanam2023-sx}と、ロジスティック回帰を用いて判定を行う手法の結果を比較した。
 
 \begin{enumerate}
     \item \textbf{特徴量エンジニアリングの比較}
@@ -256,7 +302,7 @@ AbuAlghanamらが提案したIFを用いた異常検知手法\cite{AbuAlghanam20
         \end{itemize}
     \item \textbf{判定の組み合わせアルゴリズムの比較}
         \begin{itemize}
-            \item 2つのサブシステムの判定を組み合わせて判定
+            \item AbuAlghanamらの判定手法\cite{AbuAlghanam2023-sx}
             \item ロジスティック回帰を用いて判定
         \end{itemize}
 \end{enumerate}
@@ -335,8 +381,8 @@ AbuAlghanamらが提案したIFを用いた異常検知手法\cite{AbuAlghanam20
         \hline
         特徴量選択なし, 閾値ベース & 0.7506 & 0.7526 \\
         特徴量選択なし, 提案手法 & 0.8685 & 0.8666 \\
-        特徴量選択あり, 閾値ベース & 0.8440 & 0.8817 \\
-        特徴量選択あり, 提案手法 & 0.9112 & 0.9082 \\
+        特徴量選択あり, 閾値ベース & 0.8216 & 0.8545 \\
+        特徴量選択あり, 提案手法 & 0.9076 & 0.9047 \\
         \hline
     \end{tabular}
     \label{tab:model_performance_UNSW-NB15}
@@ -352,8 +398,8 @@ AbuAlghanamらが提案したIFを用いた異常検知手法\cite{AbuAlghanam20
         \hline
         特徴量選択なし, 閾値ベース& 0.7873 & 0.8171 \\
         特徴量選択なし, 提案手法 & 0.9370 & 0.9369 \\ 
-        特徴量選択あり, 閾値ベース& 0.8466 & 0.8775 \\
-        特徴量選択あり, 提案手法 & 0.9452 & 0.9452 \\
+        特徴量選択あり, 閾値ベース& 0.8574 & 0.8898 \\
+        特徴量選択あり, 提案手法 & 0.9491 & 0.9490 \\
         \hline
     \end{tabular}
     \label{tab:model_performance_NSL-KDD}
